@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Coding Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.13.1/ace.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        #gameCanvas {
+            border: 1px solid #000;
+            margin-top: 20px;
+            background-color: #f0f0f0;
+        }
+        #editor {
+            height: 300px;
+            width: 100%;
+        }
+        .win-message {
+            font-size: 1.5em;
+            color: green;
+            font-weight: bold;
+        }
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .game-over {
+            font-size: 1.5em;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="text-center">Interactive Coding Game</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Instructions</h3>
+            <p>Your goal is to control the snake to collect apples by writing the correct code in the editor below.</p>
+            <p>Available Functions:</p>
+            <ul>
+                <li><code>moveRight()</code> - Move the snake to the right</li>
+                <li><code>moveLeft()</code> - Move the snake to the left</li>
+                <li><code>moveUp()</code> - Move the snake up</li>
+                <li><code>moveDown()</code> - Move the snake down</li>
+                <li><code>changeColor("color")</code> - Change the snake's color</li>
+                <li><code>resetGame()</code> - Reset the game</li>
+            </ul>
+
+            <div class="mb-3">
+                <label for="languageSelector" class="form-label">Choose Programming Language:</label>
+                <select id="languageSelector" class="form-select">
+                    <option value="javascript" selected>JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="php">PHP</option>
+                </select>
+            </div>
+
+            <div id="editor"></div>
+            <button id="runCode" class="btn btn-success mt-2">Run Code</button>
+            <div id="result" class="mt-2"></div>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Game</h3>
+            <div class="score">Score: <span id="score">0</span></div>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div id="winMessage" class="win-message text-center mt-3" style="display: none;">You Win!</div>
+            <div id="gameOverMessage" class="game-over text-center mt-3" style="display: none;">Game Over!</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize Ace Editor
+    const editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+
+    const languageSelector = document.getElementById("languageSelector");
+    languageSelector.addEventListener("change", () => {
+        const selectedLanguage = languageSelector.value;
+        editor.session.setMode(`ace/mode/${selectedLanguage}`);
+    });
+
+    // Game setup
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let snake = [{x: 200, y: 200, size: 20}];
+    let apple = {x: Math.random() * 380, y: Math.random() * 380, size: 20};
+    let score = 0;
+    let gameOver = false;
+    let direction = "RIGHT";
+    let speed = 200; // Initial speed of the snake
+    let interval;
+
+    function drawGame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw snake
+        snake.forEach(segment => {
+            ctx.fillStyle = "green";
+            ctx.fillRect(segment.x, segment.y, segment.size, segment.size);
+        });
+
+        // Draw apple
+        ctx.fillStyle = "red";
+        ctx.fillRect(apple.x, apple.y, apple.size, apple.size);
+
+        // Check if snake hits the wall or itself
+        if (snake[0].x < 0 || snake[0].x >= canvas.width || snake[0].y < 0 || snake[0].y >= canvas.height || checkSelfCollision()) {
+            gameOver = true;
+            clearInterval(interval);
+            document.getElementById("gameOverMessage").style.display = "block";
+        }
+
+        // Check if snake eats apple
+        if (snake[0].x < apple.x + apple.size && snake[0].x + snake[0].size > apple.x &&
+            snake[0].y < apple.y + apple.size && snake[0].y + snake[0].size > apple.y) {
+            score++;
+            updateScore();
+            apple.x = Math.random() * 380;
+            apple.y = Math.random() * 380;
+            snake.push({x: snake[snake.length - 1].x, y: snake[snake.length - 1].y, size: 20}); // Grow the snake
+            if (score >= 5) {
+                document.getElementById("winMessage").style.display = "block";
+            }
+        }
+    }
+
+    function updateScore() {
+        document.getElementById("score").innerText = score;
+    }
+
+    function moveSnake() {
+        const head = {x: snake[0].x, y: snake[0].y};
+
+        if (direction === "RIGHT") head.x += 20;
+        else if (direction === "LEFT") head.x -= 20;
+        else if (direction === "UP") head.y -= 20;
+        else if (direction === "DOWN") head.y += 20;
+
+        snake.unshift(head); // Add new head to the snake
+        snake.pop(); // Remove last part of snake
+
+        drawGame();
+    }
+
+    function checkSelfCollision() {
+        for (let i = 1; i < snake.length; i++) {
+            if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function resetGame() {
+        snake = [{x: 200, y: 200, size: 20}];
+        apple = {x: Math.random() * 380, y: Math.random() * 380, size: 20};
+        score = 0;
+        updateScore();
+        gameOver = false;
+        direction = "RIGHT";
+        clearInterval(interval);
+        document.getElementById("gameOverMessage").style.display = "none";
+        document.getElementById("winMessage").style.display = "none";
+        interval = setInterval(moveSnake, speed);
+    }
+
+    // Run the user's code
+    document.getElementById("runCode").addEventListener("click", () => {
+        const userCode = editor.getValue();
+        try {
+            eval(userCode);
+            document.getElementById("result").innerText = "Code executed successfully!";
+            document.getElementById("result").classList.remove("text-danger");
+            document.getElementById("result").classList.add("text-success");
+        } catch (err) {
+            document.getElementById("result").innerText = `Error: ${err.message}`;
+            document.getElementById("result").classList.remove("text-success");
+            document.getElementById("result").classList.add("text-danger");
+        }
+    });
+
+    // Difficulty Level: Increase speed every 10 seconds
+    setInterval(() => {
+        if (!gameOver && speed > 50) {
+            speed -= 10;
+            clearInterval(interval);
+            interval = setInterval(moveSnake, speed);
+        }
+    }, 10000);
+
+    resetGame(); // Start the game when page loads
+</script>
+
+</body>
+</html>
