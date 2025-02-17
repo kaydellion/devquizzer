@@ -36,7 +36,7 @@
           <h4>Useful Links</h4>
           <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="about.php">About us</a></li>
+            <li><a href="index.php#faq">About us</a></li>
             <li><a href="terms.php">Terms of service</a></li>
             <li><a href="privacy.php">Privacy policy</a></li>
           </ul>
