@@ -24,6 +24,8 @@ $sitedescription= $row["site_description"];
 $sitekeywords= $row["site_keywords"];} 
 $adminlink=$siteurl.'/admin';
 
-
+$siteName=$sitename;
+$siteMail=$sitemail;
+$adminName='DevQuizzer';
 include "functions.php"; 
 ?>

@@ -48,7 +48,7 @@ else {
     $emailMessage_admin="<p>Hello Dear Admin,a new user has been successfully registered!</p>";
     $emailSubject_admin="New User Registeration";
     insertadminAlert($con, $adminmessage, $link, $date, $msgtype, $message_status); 
-    sendEmail($email, $name, $siteName, $siteMail, $emailMessage, $emailSubject);
+    sendEmail($email, $fullName, $siteName, $siteMail, $emailMessage, $emailSubject);
     sendEmail($siteMail, $adminName, $siteName, $siteMail, $emailMessage_admin, $emailSubject_admin);
     echo header("location:signin.php?user_login=$user_id");	
     }
