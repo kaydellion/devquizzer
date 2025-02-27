@@ -37,7 +37,7 @@ if (mysqli_affected_rows($con) == 0) {
         $user_reg_date=formatDateTime($created_date);
         $user_lastseen=formatDateTime($last_login);
 
-}}
+
 
 // Fetch notifications count
 $sql = "SELECT COUNT(*) as count FROM ".$siteprefix."notifications WHERE user = ? AND status = 0 ";
@@ -47,6 +47,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $notification_count = $row['count'];
+
+// Fetch current game level
+$sql = "SELECT level FROM dv_game_progress WHERE user_id = ? ORDER BY timestamp DESC LIMIT 1";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$currentgamelevel = $row['level'] ?? 1;
+}}
 
 //if($active_log==0){header("location: signup.php");}
 //$adminlink=$siteurl.'/admin';

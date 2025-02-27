@@ -12,6 +12,7 @@
            <?php include "links.php"; ?>
         </div>
         <h2 class="title text-primary text-bold mt-3">Hi, <?php echo htmlspecialchars($name); ?></h2>
+        <h5 class="title text-primary" >Current Game Level: <?php echo $currentgamelevel; ?></h5>
         <p class="text-light">You have <?php echo $notification_count; ?> new events</p>
     <?php
     // Fetch last 4 notifications where status is 0

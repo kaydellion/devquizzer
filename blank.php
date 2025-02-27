@@ -88,3 +88,39 @@ if (isset($_POST['editsection'])) {
         showErrorModal($statusAction, $statusMessage);
     }
 }
+
+
+function loadLevel(levelId) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "get_game_level.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send(`level_id=${levelId}`);
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const level = JSON.parse(xhr.responseText);
+      if (level) {
+        document.getElementById('levelTitle').textContent = level.title;
+        document.getElementById('levelDescription').textContent = level.description;
+        incompleteCodeEditor.setValue(level.java_code);
+        currentLevel = levelId;
+      }
+    }
+  };
+}
+
+// Add a function to show hints for current level
+function showHint() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "get_game_hint.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send(`level=${currentLevel}`);
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const response = JSON.parse(xhr.responseText);
+      const hint = response.hint || "No hint available for this level.";
+      displayModal("Hint: " + hint, "Got it!", null);
+    }
+  };
+}
