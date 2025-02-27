@@ -386,11 +386,14 @@ function parseJavaCode(javaCode) {
         }
         //console.log("Final JavaScript code:", javaCode);
 
-        // Execute JavaScript code
+         // Execute JavaScript code
         const script = document.createElement('script');
-        script.textContent = javaCode;
-        document.body.appendChild(script);
-        document.body.removeChild(script);
+        script.type = 'text/javascript';
+        // Wrap the code in a try-catch block
+        script.textContent = `try { ${javaCode} } catch(e) { console.error(e); }`;
+        // Use a safe way to append and execute script
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
 
         return true;
     } catch (error) {
@@ -405,7 +408,7 @@ function executeJavaCode() {
   const javaCode = incompleteCodeEditor.getValue();
   const success = parseJavaCode(javaCode);
   const active_log = <?php echo $active_log; ?>;
-  const user = <?php echo $user_id; ?>;
+  const user = <?php echo (isset($user_id) && !empty($user_id)) ? $user_id : 'null'; ?>;
   const game_level = currentLevel;
   const solution = <?php echo json_encode($solution_code); ?>;
   
@@ -424,7 +427,7 @@ function executeJavaCode() {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(`user_id=${user}&level=${game_level}&status=completed`);
         
-        setTimeout(function() {
+    
           xhr.onload = function() {
             // Re-enable button and restore text
             runButton.disabled = false;
@@ -433,19 +436,17 @@ function executeJavaCode() {
             const response = xhr.responseText;
             if (response.includes("Code executed successfully")) {
               const nextLevel = parseInt(response.match(/level (\d+)/)[1]);
-                displayModal("Correct solution! Moving to next level.", "Continue", function() {
-                showToast('You have been rewarded with 25 points. Keep it up');
+                displayModal("Correct solution! Moving to next level. You have been rewarded with 25 points. Keep it up", "Continue",null);
                 setTimeout(() => {
                   window.location.reload();
-                }, 5000);
-              });
+                }, 3000);
+              
             } else if (response.includes("Error saving progress")) {
               displayModal("Error saving progress", "Try Again", null);
             } else if (response.includes("Invalid data")) {
               displayModal("Invalid data submitted", "Try Again", null);
             }
           };
-        }, 40000);
       } else {
         runButton.disabled = false;
         runButton.textContent = 'Run Code';
@@ -538,11 +539,11 @@ function startGame() {
   playSound("move");
   setInterval(() => {
     if (gameRunning) moveDown();
-  }, 1000);
+  }, 5000);
   draw();
   
   // Load first level
-  loadLevel(1);
+  loadLevel(<?php echo $current_level;?>);
 }
 
 // Start the game when the page loads
@@ -561,7 +562,7 @@ function loadLevel(levelId) {
     if (xhr.status === 200) {
       const level = JSON.parse(xhr.responseText);
       if (level) {
-        document.getElementById('levelTitle').textContent = level.title;
+        document.getElementById('levelTitle').textContent = `Level ${level.id}: ${level.title}`;
         document.getElementById('levelDescription').textContent = level.description;
         incompleteCodeEditor.setValue(level.java_code);
         currentLevel = levelId;
