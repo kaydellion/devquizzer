@@ -64,7 +64,7 @@ if ($user_id !="" && $level > 0 && $status == 'completed') {
                 throw new Exception('Query execution failed: ' . $stmt->error);
             }
             $stmt->close();
-            echo "Code executed successfully.Game course completed successfully!. Go to your enrolled courses on your dashboard to view your certificate.<br>
+            echo "Code executed successfully.Game course completed successfully!. Go to your enrolled courses on your dashboard to view your certificate.
             Game will restart from level 1";
         } else {
             echo "Code executed successfully. Correct solution! moving on to level $nextlevel. You have been rewarded with 25 points. Keep it up";

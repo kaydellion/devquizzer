@@ -415,7 +415,7 @@ function parseJavaCode(javaCode) {
         if (functionToCall) {
             javaCode += `\nuser_${functionToCall}();`;
         }
-        console.log("Final JavaScript code:", javaCode);
+        //console.log("Final JavaScript code:", javaCode);
 
         // Execute JavaScript code
         const script = document.createElement('script');
