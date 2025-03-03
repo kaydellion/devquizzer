@@ -4,6 +4,7 @@
 //previous page
 $_SESSION['previous_page'] = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $previousPage = $_SESSION['previous_page'] ?? 'index.php';
+$imagePath= "uploads/";
 
 $code = "";
 if (isset($_COOKIE['userID'])) {$code = $_COOKIE['userID'];}
@@ -16,6 +17,7 @@ if (mysqli_affected_rows($con) == 0) {
     $sql2 = mysqli_query($con, $sql);
     while ($row = mysqli_fetch_array($sql2)) {
         $id = $row["s"];
+        $googleid = $row["google_id"];
         $name = $row['name'];
         $email = $row['email'];
         $password = $row['password'];
@@ -36,6 +38,8 @@ if (mysqli_affected_rows($con) == 0) {
         $username=getFirstWord($name);
         $user_reg_date=formatDateTime($created_date);
         $user_lastseen=formatDateTime($last_login);
+
+        if($googleid=""){$profile_picture=$imagePath.$profile_picture;}else{$profile_picture=$profile_picture;}
 
 
 

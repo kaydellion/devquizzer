@@ -11,11 +11,11 @@ if (!$data || !isset($data->email)) {
 $google_id = $data->sub;
 $name = $data->name;
 $email = $data->email;
-$profile_pic = 'user.png';
+$profile_pic = $data->picture;
 
 
 // Check if user already exists
-$stmt = $conn->prepare("SELECT * FROM ".$siteprefix."users WHERE email = ?");
+$stmt = $con->prepare("SELECT * FROM ".$siteprefix."users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -30,14 +30,14 @@ if ($result->num_rows > 0) {
     $status = 'active';
     $options = ''; // Set default preferences if needed
     
-    $stmt = $conn->prepare("INSERT INTO ".$siteprefix."users (google_id, name, email, profile_pic, type, reward_points, created_date, last_login, email_verify, status, preference) 
+    $stmt = $con->prepare("INSERT INTO ".$siteprefix."users (google_id, name, email, profile_pic, type, reward_points, created_date, last_login, email_verify, status, preference) 
                            VALUES (?, ?, ?, ?, 'user', 0, ?, ?, 1, ?, ?)");
     $stmt->bind_param("ssssssss", $google_id, $name, $email, $profile_pic, $date, $date, $status, $options);
     $stmt->execute();
 }
 
 // Fetch user data again after insertion
-$stmt = $conn->prepare("SELECT * FROM ".$siteprefix."users WHERE google_id = ?");
+$stmt = $con->prepare("SELECT * FROM ".$siteprefix."users WHERE google_id = ?");
 $stmt->bind_param("s", $google_id);
 $stmt->execute();
 $result = $stmt->get_result();
