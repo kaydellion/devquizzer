@@ -411,11 +411,11 @@ function parseJavaCode(javaCode) {
         }
         //console.log("Final JavaScript code:", javaCode);
 
-         // Execute JavaScript code
+        // Execute JavaScript code
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        // Wrap the code in a try-catch block
-        script.textContent = `try { ${javaCode} } catch(e) { console.error(e); }`;
+        // Wrap the code in a try-catch block and IIFE
+        script.textContent = `(function() { try { ${javaCode} } catch(e) { console.error(e); } })();`;
         // Use a safe way to append and execute script
         (document.head || document.documentElement).appendChild(script);
         script.remove();
