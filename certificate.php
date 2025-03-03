@@ -20,17 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     imagettftext($image, 70, 0, 760, 680, $textColor, $font2Path, $name);
     imagettftext($image, 40, 0, 780, 800, $textColor, $fontPath, $course);
     
-    // Center and word wrap course
-    $bbox = imagettfbbox(40, 0, $fontPath, $course);
-    $x = (imagesx($image) - ($bbox[2] - $bbox[0])) / 2;
-    imagettftext($image, 40, 0, $x, 800, $textColor, $fontPath, $course);
-
     // Word wrap content
     $maxWidth = 1000;
     $lines = explode("\n", wordwrap($content, 80, "\n")); // Reduced characters per line
     $y = 920; // Increased starting Y position
     $lineHeight = 40; // Increased line height
-    // First add the course title with proper spacing and word wrap
+
+    // Add the course title with proper spacing and word wrap
     $titleLines = explode("\n", wordwrap($course, 40, "\n")); // Wrap title text
     $titleY = 850;
     foreach ($titleLines as $line) {
