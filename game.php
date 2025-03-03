@@ -32,8 +32,6 @@
       echo '</select>
         </div>
       </div>';
-      
-      $current_level = 1;
       } else {
       $current_level = ($row['last_level']) ? $row['last_level'] + 1 : 1;
       }
