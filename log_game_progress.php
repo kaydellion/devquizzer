@@ -67,7 +67,7 @@ if ($user_id !="" && $level > 0 && $status == 'completed') {
             echo "Code executed successfully.Game course completed successfully!. Go to your enrolled courses on your dashboard to view your certificate.<br>
             Game will restart from level 1";
         } else {
-            echo "Code executed successfully,moving on to level $nextlevel";
+            echo "Code executed successfully. Correct solution! moving on to level $nextlevel. You have been rewarded with 25 points. Keep it up";
         }
 
     } catch (Exception $e) {

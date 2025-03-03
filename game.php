@@ -467,7 +467,7 @@ function executeJavaCode() {
             const response = xhr.responseText;
             if (response.includes("Code executed successfully")) {
               const nextLevel = parseInt(response.match(/level (\d+)/)[1]);
-                displayModal("Correct solution! Moving to next level. You have been rewarded with 25 points. Keep it up", "Continue",null);
+                displayModal(response, "Continue",null);
                 setTimeout(() => {
                   window.location.reload();
                 }, 3000);
