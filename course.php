@@ -264,10 +264,15 @@ if($course_id==1){
           <p><a href="course-view.php?course=<?php echo $course_id; ?>" class="btn-get-started w-100 text-center"><?php echo $enrolled_text; ?></a></p>
           <?php } ?>
           <div class="d-flex justify-content-center">
-            <a href="#"><i class="bi bi-facebook text-primary p-2"></i></a>
-            <a href="#"><i class="bi bi-twitter-x text-dark p-2"></i></a>
-            <a href="#"><i class="bi bi-whatsapp text-success p-2"></i></a>
-            <a href="#"><i class="bi bi-linkedin text-primary p-2"></i></a>
+            <?php
+            $share_url = urlencode("https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+            $share_title = urlencode($title);
+            $share_text = urlencode("Check out this course: " . $title);
+            ?>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $share_url; ?>" target="_blank"><i class="bi bi-facebook text-primary p-2"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=<?php echo $share_text; ?>&url=<?php echo $share_url; ?>" target="_blank"><i class="bi bi-twitter-x text-dark p-2"></i></a>
+            <a href="https://api.whatsapp.com/send?text=<?php echo $share_text . ' ' . $share_url; ?>" target="_blank"><i class="bi bi-whatsapp text-success p-2"></i></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $share_url; ?>" target="_blank"><i class="bi bi-linkedin text-primary p-2"></i></a>
           </div>
         </li>
       </ul>
