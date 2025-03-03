@@ -4,7 +4,7 @@
 <section>
 <div class="row bg-dark p-5">
     <div class="col-lg-2 col-12">
-        <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Avatar" class="img-fluid rounded-circle">
+        <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Avatar" class="img-fluid rounded-circle">
     </div>
     <div class="col-lg-10 col-12 d-flex align-items-center pt-3 mb-5">
         <div class="d-flex flex-column w-100">

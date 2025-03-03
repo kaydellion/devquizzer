@@ -56,12 +56,10 @@ if ($user_id !="" && $level > 0 && $status == 'completed') {
        
         if ($level == 40) {
             // Update certificate status in enrolled course
-            $query = "UPDATE {$siteprefix}enrolled_courses 
-                 SET certificate = 1, 
-                 end_date = NOW() 
-                 WHERE user_id = ? AND course_id = ?";
+            $query = "INSERT INTO dv_enrolled_courses (user_id, course_id, start_date, end_date, certificate) 
+                      VALUES (?, 1, NOW(), NOW(), 1)";
             $stmt = $con->prepare($query);
-            $stmt->bind_param('ii', $user_id, 1);
+            $stmt->bind_param('i', $user_id);
             if (!$stmt->execute()) {
                 throw new Exception('Query execution failed: ' . $stmt->error);
             }
