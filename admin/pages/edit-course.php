@@ -87,7 +87,7 @@ if (mysqli_num_rows($result) > 0) {
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Select New  featured image</label>
                         <input class="form-control" type="file" name="featured" id="formFile"/>
-                        <small class="text-muted">Current image: <img style="width: 20%;"  src="../../uploads/<?php echo htmlspecialchars($course_media); ?>" alt="Course Image"></small>
+                        <small class="text-muted">Current image: <img style="width: 20%;"  src="<?php echo $siteurl;?>uploads/<?php echo htmlspecialchars($course_media); ?>" alt="Course Image"></small>
                       </div>
                       <div class="mb-3">
                         <select class="form-select" name="status" id="exampleFormControlSelect1" aria-label="Default select example" required>
