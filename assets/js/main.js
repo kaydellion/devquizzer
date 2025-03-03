@@ -255,3 +255,28 @@ function previewProfilePicture(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
 }
+
+function handleCredentialResponse(response) {
+  // Decode JWT token to get user data
+  const data = JSON.parse(atob(response.credential.split(".")[1]));
+
+  // Send user data to PHP for authentication
+  fetch('../google-auth.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(data => {
+      if (data.status === 'success') {
+          window.location.href = 'dashboard.php';
+      } else if (data.status === 'exists') {
+          showToast(data.message);
+      } else {
+          alert('Google authentication failed!');
+      }
+  })
+  .catch(err => console.error(err));
+}

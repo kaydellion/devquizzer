@@ -1,5 +1,36 @@
 <?php
 
+
+//reset password
+if(isset($_POST['resetpassword'])){
+    $email=$_POST['email'];
+    
+    $check = "SELECT * FROM ".$siteprefix."users WHERE email= '$email'";
+    $query = mysqli_query($con, $check);
+    
+    if (mysqli_affected_rows($con) == 0) {
+    $statusAction="Invalid User";
+    $statusMessage="User not found!";
+    showErrorModal($statusAction,$statusMessage);
+    } else {
+        $sql= "SELECT * FROM ".$siteprefix."users WHERE email= '$email'";
+        $sql2 = mysqli_query($con, $sql);
+        while ($row = mysqli_fetch_array($sql2)) {
+            $user_name = $row['name'];
+            $user_email = $row['email'];}
+            
+    $randomPassword = generateRandomHardPassword();
+    $password=hashPassword($randomPassword);
+    $emailMessage="<p>Your password has been reset successfully to $randomPassword <br>Please login with it to change your password to a desired format.</p>";
+    $emailSubject="Password Reset";
+    $statusAction="Successful";
+    $statusMessage="Password reset successfully. Please check your email!";
+    $submit = mysqli_query($con, "UPDATE " . $siteprefix . "users SET password ='$password' WHERE email = '$email'") or die('Could not connect: ' . mysqli_error($con));
+    sendEmail($user_email, $user_name, $siteName, $siteMail, $emailMessage, $emailSubject);
+    showSuccessModal($statusAction,$statusMessage);
+    }}
+
+    
 //register user
 if(isset($_POST['register'])){
     $fullName = $_POST['fullName'];
@@ -32,8 +63,8 @@ else if ($password !== $retypePassword ){
 else {
     $password=hashPassword($password);
     
-    $submit = mysqli_query($con, " INSERT INTO `".$siteprefix."users` (`name`, `email`, `password`, `type`, `reward_points`, `created_date`, `last_login`, `email_verify`, `status`,`profile_picture`,`preference`)
-     VALUES ('$fullName', '$email', '$password', 'user', 0, '$date', '$date', 1, '$status','','$options')")
+    $submit = mysqli_query($con, " INSERT INTO `".$siteprefix."users` (`google_id`,`name`, `email`, `password`, `type`, `reward_points`, `created_date`, `last_login`, `email_verify`, `status`,`profile_picture`,`preference`)
+    VALUES ('$fullName', '$email', '$password', 'user', 0, '$date', '$date', 1, '$status','','$options')")
     or die('Could not connect: ' . mysqli_error($con));
     $user_id = mysqli_insert_id($con);
     

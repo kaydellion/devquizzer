@@ -9,13 +9,13 @@
 
 <div class="col-lg-6 side-padding">
 <p class="pt-5"><img src="assets/img/pagelogo.png" class="logo"></p>
-<form>
+<form method="post">
 <p class="text-bold">No worries! Enter your registered email address, and we'll help you reset it</p>
 <div class="form-group pt-3 pb-3">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
-<p><button class="w-100 btn-get-started">Reset Password</button></p>
+<p><button class="w-100 btn-get-started" name="resetpassword">Reset Password</button></p>
 </form>
 </div>
 

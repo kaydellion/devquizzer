@@ -248,8 +248,8 @@ else if ($password !== $retypePassword ){
 else {
     $password=hashPassword($password);
     
-    $submit = mysqli_query($con, " INSERT INTO `".$siteprefix."users` (`name`, `email`, `password`, `type`, `reward_points`, `created_date`, `last_login`, `email_verify`, `status`,`profile_picture`,`preference`)
-     VALUES ('$fullName', '$email', '$password', '$type', 0, '$date', '$date', 1, '$status','','$options')")
+    $submit = mysqli_query($con, " INSERT INTO `".$siteprefix."users` (`google_id`,`name`, `email`, `password`, `type`, `reward_points`, `created_date`, `last_login`, `email_verify`, `status`,`profile_picture`,`preference`)
+     VALUES ('','$fullName', '$email', '$password', '$type', 0, '$date', '$date', 1, '$status','','$options')")
     or die('Could not connect: ' . mysqli_error($con));
     $user_id = mysqli_insert_id($con);
     

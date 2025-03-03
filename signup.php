@@ -61,6 +61,23 @@
   </div>
 <p class="pt-3"><label><input type="checkbox" required> I agree to all the <a href="terms.php">Terms</a> and <a href="policies.php">Privacy Policies</a></label></p>
 <p><button class="w-100 btn-get-started" name="register" value="register-user">Create Account</button></p>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<div id="g_id_onload"
+     data-client_id="194981606848-ll4hbu3g2tbkjco21rvepv5ii85er19n.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse"
+     data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-size="large"
+     data-theme="outline"
+     data-text="sign_in_with"
+     data-shape="rectangular"
+     data-logo_alignment="left">
+</div>
+
 </form>
 
 <p class="pt-3"><hr></p>

@@ -6,17 +6,39 @@
 <?php
     // Database connection
     if ($active_log==1){
-    $sql = "SELECT MAX(level) as last_level FROM ".$siteprefix."game_progress 
-        WHERE user_id = ? AND status = 'completed'";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    // If user has completed levels, get next level, otherwise start at level 1
-    $current_level = ($row['last_level']) ? $row['last_level'] + 1 : 1;}
-    else {
-        $current_level = 1;
+      $sql = "SELECT MAX(level) as last_level FROM ".$siteprefix."game_progress 
+      WHERE user_id = ? AND status = 'completed'";
+      $stmt = $con->prepare($sql);
+      $stmt->bind_param("i", $user_id);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $row = $result->fetch_assoc();
+      
+      if (isset($_GET['level']) && $row['last_level'] >= 40) {
+      $current_level = intval($_GET['level']);
+      } else if ($row['last_level'] >= 40) {
+      // Get all levels for dropdown
+      $levels_sql = "SELECT id, title FROM ".$siteprefix."game_levels ORDER BY id";
+      $levels_result = $con->query($levels_sql);
+      
+      echo '<div id="completionModal" class="modal">
+        <div class="modal-content">
+        <h3>Congratulations!</h3>
+        <p>You have completed all game levels! Select any level to review:</p>
+        <select id="levelSelect" onchange="window.location.href=\'game.php?level=\'+this.value">';
+      while($level = $levels_result->fetch_assoc()) {
+        echo '<option value="'.$level['id'].'">Level '.$level['id'].': '.$level['title'].'</option>';
+      }
+      echo '</select>
+        </div>
+      </div>';
+      
+      $current_level = 1;
+      } else {
+      $current_level = ($row['last_level']) ? $row['last_level'] + 1 : 1;
+      }
+    } else {
+      $current_level = 1; 
     }
 
     // Get level details
@@ -38,6 +60,7 @@
     ?>
 
     <div class="row bg-dark">
+
     <div class="col-md-6 p-5 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
         <p id="levelDescription"><?php echo $description; ?><br>
