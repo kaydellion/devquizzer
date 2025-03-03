@@ -366,7 +366,7 @@ function showSuccessModal($statusAction,$statusMessage) {
     echo '</svg>';
     echo '<h4 class="text-success mt-3">' . $statusAction. '</h4>';
     echo '<p class="mt-3">' . $statusMessage. '</p>';
-    echo '<button type="button" class="btn btn-sm mt-3 btn-success" data-dismiss="modal">Okay</button>';
+    echo '<button type="button" class="btn btn-sm mt-3 btn-success" data-bs-dismiss="modal">Okay</button>';
     echo '</div>';
     echo '</div>';
     echo '</div>';
@@ -390,7 +390,7 @@ function showErrorModal($statusAction, $statusMessage) {
     echo '</svg>';
     echo '<h4 class="text-danger mt-3">' . $statusAction. '</h4>';
     echo '<p class="mt-3">' . $statusMessage. '</p>';
-    echo '<button type="button" class="btn btn-sm mt-3 btn-danger" data-dismiss="modal">Okay</button>';
+    echo '<button type="button" class="btn btn-sm mt-3 btn-danger" data-bs-dismiss="modal">Okay</button>';
     echo '</div>';
     echo '</div>';
     echo '</div>';
