@@ -39,7 +39,7 @@ if (mysqli_affected_rows($con) == 0) {
         $user_reg_date=formatDateTime($created_date);
         $user_lastseen=formatDateTime($last_login);
 
-        if($googleid=""){$profile_picture=$imagePath.$profile_picture;}else{$profile_picture=$profile_picture;}
+        if($googleid==""){$profile_picture=$imagePath.$profile_picture;}else{$profile_picture=$profile_picture;}
 
 
 
