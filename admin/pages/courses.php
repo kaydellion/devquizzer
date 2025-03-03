@@ -48,7 +48,7 @@ $query = "SELECT c.*,u.name, l.title AS category, COUNT(t.course_id) as theory_c
             $Dateupdated = $row['updated_date'];
             $status = $row['status'];
             $dateCreated = $row['created_date']; 
-            $owner = $row['updated_by'];
+            $owner = $row['name'];
             $lesson_count = $row['theory_count'];
             $course_media = $row['featured_image'];
 
