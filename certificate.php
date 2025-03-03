@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Add the course title with proper spacing and word wrap
     $titleLines = explode("\n", wordwrap($course, 40, "\n")); // Wrap title text
-    $titleY = 700;
+    $titleY = 800;
     foreach ($titleLines as $line) {
         $bbox = imagettfbbox(40, 0, $fontPath, $line);
         $x = (imagesx($image) - ($bbox[2] - $bbox[0])) / 2;
