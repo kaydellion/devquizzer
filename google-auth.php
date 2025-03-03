@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {
     $status = 'active';
     $options = '';
     
-    $stmt = $con->prepare("INSERT INTO ".$siteprefix."users (google_id, name, email, profile_pic, type, reward_points, created_date, last_login, email_verify, status, preference) 
+    $stmt = $con->prepare("INSERT INTO ".$siteprefix."users (google_id, name, email, profile_picture, type, reward_points, created_date, last_login, email_verify, status, preference) 
                            VALUES (?, ?, ?, ?, 'user', 0, ?, ?, 1, ?, ?)");
     $stmt->bind_param("ssssssss", $google_id, $name, $email, $profile_pic, $date, $date, $status, $options);
     $stmt->execute();
