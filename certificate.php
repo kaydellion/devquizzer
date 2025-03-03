@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $maxWidth = 1000;
     $lines = explode("\n", wordwrap($content, 80, "\n")); // Reduced characters per line
     $y = 920; // Increased starting Y position
-    $lineHeight = 40; // Increased line height
+    $lineHeight = 10; // Increased line height
 
     // Add the course title with proper spacing and word wrap
     $titleLines = explode("\n", wordwrap($course, 40, "\n")); // Wrap title text
