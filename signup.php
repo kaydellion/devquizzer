@@ -77,7 +77,6 @@
      data-shape="rectangular"
      data-logo_alignment="left">
 </div>
-
 </form>
 
 <p class="pt-3"><hr></p>

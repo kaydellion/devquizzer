@@ -255,10 +255,17 @@ function previewProfilePicture(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
 }
-
 function handleCredentialResponse(response) {
+  console.log("Encoded JWT ID token: " + response.credential);
+
   // Decode JWT token to get user data
-  const data = JSON.parse(atob(response.credential.split(".")[1]));
+  const base64Url = response.credential.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  const data = JSON.parse(jsonPayload);
 
   // Send user data to PHP for authentication
   fetch('../google-auth.php', {
@@ -281,15 +288,10 @@ function handleCredentialResponse(response) {
   .catch(err => console.error(err));
 }
 
-function handleCredentialResponse(response) {
-  console.log("Encoded JWT ID token: " + response.credential);
-  // Process the token or send it to your backend
-}
-
 google.accounts.id.initialize({
   client_id: "194981606848-ll4hbu3g2tbkjco21rvepv5ii85er19n.apps.googleusercontent.com",
   callback: handleCredentialResponse,
   ux_mode: "popup" // Ensure popup mode is set
 });
 
-google.accounts.id.prompt(); // Shows the one-tap prompt
+google.accounts.id.prompt(); // Shows the one-tap prompt.
