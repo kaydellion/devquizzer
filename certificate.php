@@ -27,15 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Word wrap content
     $maxWidth = 1000;
-    $lines = explode("\n", wordwrap($content, 100, "\n"));
-    $y = 880;
+    $lines = explode("\n", wordwrap($content, 80, "\n")); // Reduced characters per line
+    $y = 920; // Increased starting Y position
+    $lineHeight = 40; // Increased line height
     foreach ($lines as $line) {
         // Get the size of the text box
         $bbox = imagettfbbox(20, 0, $fontPath, $line);
         // Calculate x position to center the text
         $x = (imagesx($image) - ($bbox[2] - $bbox[0])) / 2;
         imagettftext($image, 20, 0, $x, $y, $textColor, $fontPath, $line);
-        $y += 30;
+        $y += $lineHeight; // Use the new line height
     }
 
     // Set headers for download
