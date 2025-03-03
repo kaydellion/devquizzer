@@ -21,11 +21,13 @@ if (isset($_POST['login'])){
     $type = $row['type'];
     }
 
-    if (!checkPassword($password, $hashedPassword)) {
-    echo'Incorrect Password for this account! <a href="forgetpassword.php" style="color:red;">Forgot password? Recover here</a>';
-    }
-                
-   else if($status == "active" && $type=="admin" || $type =="instructor"){
+if (!checkPassword($password, $hashedPassword)) {
+echo'Incorrect Password for this account! <a href="forgetpassword.php" style="color:red;">Forgot password? Recover here</a>';
+} 
+else if($status == "active" && $type=="user"){
+echo "You are not authorized to access this page";
+}          
+else if($status == "active" && $type=="admin" || $type =="instructor"){
     $date=date('Y-m-d H:i:s');
     $insert = mysqli_query($con,"UPDATE ".$siteprefix."users SET last_login='$date' where s='$id'") or die ('Could not connect: ' .mysqli_error($con)); 
                   

@@ -47,8 +47,8 @@
               </div>
               <!-- /Logo -->
               <p class="mb-4 text-center text-danger"><?php include "login.php"; ?></p>
-              <h4 class="mb-2">Welcome to DevQuizzer! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              <h4 class="mb-2 text-center ">Welcome to DevQuizzer! 👋</h4>
+              <p class="mb-1 text-center ">Please sign-in to your account and start the adventure</p>
 
               <form class="mb-3" action="" method="POST">
                 <div class="mb-3">
