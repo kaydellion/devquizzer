@@ -280,3 +280,16 @@ function handleCredentialResponse(response) {
   })
   .catch(err => console.error(err));
 }
+
+function handleCredentialResponse(response) {
+  console.log("Encoded JWT ID token: " + response.credential);
+  // Process the token or send it to your backend
+}
+
+google.accounts.id.initialize({
+  client_id: "194981606848-ll4hbu3g2tbkjco21rvepv5ii85er19n.apps.googleusercontent.com",
+  callback: handleCredentialResponse,
+  ux_mode: "popup" // Ensure popup mode is set
+});
+
+google.accounts.id.prompt(); // Shows the one-tap prompt
