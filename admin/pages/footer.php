@@ -27,6 +27,26 @@
 
 
     <!-- Core JS -->
+    <script>
+$(document).ready(function() {
+    $('.table').each(function() {
+        if ($(this).find('tbody tr').length > 1) { // Ensure the table has at least one row
+            $(this).DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "lengthMenu": [10, 25, 50, 100],
+                "autoWidth": false,
+                "language": {
+                    "zeroRecords": "No records available",
+                    "emptyTable": "No data available in table"
+                }
+            });
+        }
+    });
+});
+</script>
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
@@ -41,7 +61,6 @@
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>

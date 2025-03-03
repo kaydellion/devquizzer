@@ -35,6 +35,7 @@ if (mysqli_affected_rows($con) == 0) {
 
         $active_log = 1;
         $user_id=$id;
+        $_SESSION['user_id']=$id;
         $username=getFirstWord($name);
         $user_reg_date=formatDateTime($created_date);
         $user_lastseen=formatDateTime($last_login);

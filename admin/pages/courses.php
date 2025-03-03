@@ -21,12 +21,23 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-<?php $query = "SELECT c.*, l.title AS category, COUNT(t.course_id) as theory_count 
+<?php 
+if($type=='admin'){
+  $query = "SELECT c.*, u.name, l.title AS category, COUNT(t.course_id) as theory_count 
+  FROM ".$siteprefix."courses c 
+  LEFT JOIN ".$siteprefix."languages l ON c.language=l.s 
+  LEFT JOIN ".$siteprefix."theory t ON t.course_id=c.s 
+  LEFT JOIN ".$siteprefix."users u ON u.s=c.updated_by
+  GROUP BY c.s";
+  $result = mysqli_query($con, $query);
+}else{
+$query = "SELECT c.*,u.name, l.title AS category, COUNT(t.course_id) as theory_count 
         FROM ".$siteprefix."courses c 
         LEFT JOIN ".$siteprefix."languages l ON c.language=l.s 
         LEFT JOIN ".$siteprefix."theory t ON t.course_id=c.s 
-        GROUP BY c.s";
-        $result = mysqli_query($con, $query);
+        LEFT JOIN ".$siteprefix."users u ON u.s=c.updated_by
+        GROUP BY c.s WHERE c.updated_by='$user_id'";
+        $result = mysqli_query($con, $query);}
         if(mysqli_num_rows($result) > 0 ) { $i=1;
         while ($row = mysqli_fetch_assoc($result)) {
             // Accessing individual fields

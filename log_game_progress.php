@@ -16,7 +16,7 @@ if ($user_id !="" && $level > 0 && $status == 'completed') {
         $check_stmt->close();
 
         if ($already_completed) {
-            echo "Code executed successfully. You have already completed all levels!";
+            echo "Code executed successfully. You have already completed all levels! Now go the course and leave a review,also you can download your certificate on your dashboard";
             return;
         }
 

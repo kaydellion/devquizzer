@@ -20,7 +20,13 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
 <?php 
-$query = "SELECT q.*, c.title AS course, (SELECT COUNT(*) FROM ".$siteprefix."quiz_questions WHERE quiz_id=q.s) as question_count FROM ".$siteprefix."quiz q LEFT JOIN ".$siteprefix."courses c ON q.course_id=c.s"; 
+if($type=='admin'){
+  $query = "SELECT q.*, c.title AS course, (SELECT COUNT(*) FROM ".$siteprefix."quiz_questions WHERE quiz_id=q.s) as question_count FROM ".$siteprefix."quiz q LEFT JOIN ".$siteprefix."courses c ON q.course_id=c.s"; 
+  $result = mysqli_query($con, $query);
+} else {
+  $query = "SELECT q.*, c.title AS course, (SELECT COUNT(*) FROM ".$siteprefix."quiz_questions WHERE quiz_id=q.s) as question_count FROM ".$siteprefix."quiz q LEFT JOIN ".$siteprefix."courses c ON q.course_id=c.s WHERE q.updated_by='$user_id'";
+  $result = mysqli_query($con, $query);
+}
   $result = mysqli_query($con, $query);
   if(mysqli_num_rows($result) > 0 ) { $i=1;
   while ($row = mysqli_fetch_assoc($result)) {

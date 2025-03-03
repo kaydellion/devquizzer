@@ -165,3 +165,32 @@ function previewProfilePicture(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
 }
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  // Remove existing highlights
+  document.querySelectorAll('mark').forEach(mark => {
+    mark.outerHTML = mark.innerHTML;
+  });
+
+  const searchText = this.value.trim();
+  if (searchText.length > 0) {
+    // Get all text nodes in the document body
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+
+    let node;
+    while (node = walker.nextNode()) {
+      const content = node.textContent;
+      if (content.toLowerCase().includes(searchText.toLowerCase())) {
+        const regex = new RegExp(`(${searchText})`, 'gi');
+        const newNode = document.createElement('span');
+        newNode.innerHTML = content.replace(regex, '<mark style="background-color: yellow">$1</mark>');
+        node.parentNode.replaceChild(newNode, node);
+      }
+    }
+  }
+});

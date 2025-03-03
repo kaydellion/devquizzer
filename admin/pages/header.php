@@ -103,10 +103,18 @@ include "actions.php"; ?>
 
     <!-- Helpers -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <script src="../assets/js/config.js"></script>
-    <!-- Place the first <script> tag in your HTML's <head> -->
+
+    <!-- jQuery (ensure only one version) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.min.css">
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="../assets/vendor/js/helpers.js"></script>
+<script src="../assets/js/config.js"></script>
+<!-- Place the first <script> tag in your HTML's <head> -->
 <script src="https://cdn.tiny.cloud/1/lxphyils3mh06lqfkntl7w5kgljaoegwzfnylpr6m9g3ids6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
@@ -235,6 +243,7 @@ include "actions.php"; ?>
 
             <li class="menu-item"><a href="rewards.php" class="menu-link"><i class="menu-icon tf-icons bx bxs-bar-chart-alt-2"></i><div data-i18n="Spinners">Rewards Leaderboard</div></a></li>
             
+            <?php if ($type == 'admin') { ?>
             <!-- Components -->           
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Users</span></li>
             <li class="menu-item"><a href="adduser.php" class="menu-link"><i class="menu-icon tf-icons bx bx-user-plus"></i><div data-i18n="Spinners">Add New User</div></a></li>
@@ -247,7 +256,7 @@ include "actions.php"; ?>
             <li class="menu-item"> <a href="notifications.php" class="menu-link"><i class="menu-icon tf-icons bx bx-bell"></i> <div data-i18n="Spinners">Notifications</div></a></li>
             <li class="menu-item"> <a href="settings.php" class="menu-link"><i class="menu-icon tf-icons bx bx-cog"></i> <div data-i18n="Spinners">Settings</div></a></li>
             <li class="menu-item"> <a href="logout.php" class="menu-link"><i class="menu-icon tf-icons bx bx-log-out"></i> <div data-i18n="Spinners">Log Out</div></a></li>
-            
+            <?php } ?>
         </aside>
         <!-- / Menu -->
 
@@ -266,21 +275,24 @@ include "actions.php"; ?>
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
+                <!-- Search -->
+                <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
+                  type="text" 
+                  id="searchInput"
+                  class="form-control border-0 shadow-none"
+                  placeholder="Search..."
+                  aria-label="Search..."
                   />
                 </div>
-              </div>
-              <!-- /Search -->
+                </div>
+                <!-- /Search -->
+
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <?php if ($type == 'admin') { ?>
               <li class="nav-item lh-1 me-3">
                   <?php if(isset($notification_count) && $notification_count > 0): ?>
                     <a href="notifications.php" class="position-relative">
@@ -294,7 +306,7 @@ include "actions.php"; ?>
                       <i class="bx bx-bell fs-4"></i>
                     </a>
                   <?php endif; ?>
-                </li>
+                </li><?php } ?> 
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">

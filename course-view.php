@@ -180,6 +180,8 @@ $show_certificate='<p class="mt-3">Your course is currently still in progress. W
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Certificate</button>
           </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Review</button>
         </ul>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active p-3" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -189,11 +191,88 @@ $show_certificate='<p class="mt-3">Your course is currently still in progress. W
           <hr>
           <div><?php echo $content; ?></div>
           <p> <a href="<?php echo $button_link; ?>" class="btn btn-primary w-100 mt-3"><?php echo $button_text; ?></a></p></div>
+
+<div></div>
+
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <!-- show certificated -->
           <?php echo $show_certificate; ?>
           </div>
-         </div>
+
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <!-- show reviews-->
+     <?php if($certificate == 1){
+            // Check for existing review
+            $review_query = "SELECT * FROM {$siteprefix}reviews WHERE course_id = $course_id AND user = $user_id";
+            $review_result = mysqli_query($con, $review_query);
+            $existing_review = mysqli_fetch_assoc($review_result);
+          ?>
+            <div class="review-section mt-4">
+              <h6 class="mb-3">Leave a Review</h6>
+              <form id="reviewForm" method="POST">
+                <div class="rating mb-3">
+                  <?php for($i = 5; $i >= 1; $i--): ?>
+                    <input type="radio" name="rating" value="<?php echo $i; ?>" id="star<?php echo $i; ?>" 
+                      <?php echo ($existing_review && $existing_review['rating'] == $i) ? 'checked' : ''; ?>>
+                    <label for="star<?php echo $i; ?>">☆</label>
+                  <?php endfor; ?>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="review" rows="3" placeholder="Write your review here..."><?php echo $existing_review ? $existing_review['review'] : ''; ?></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">
+                  <?php echo $existing_review ? 'Update Review' : 'Submit Review'; ?>
+                </button>
+              </form>
+            </div>
+
+            <script>
+            document.getElementById('reviewForm').onsubmit = function(e) {
+              e.preventDefault();
+              const formData = new FormData(this);
+              formData.append('course_id', <?php echo $course_id; ?>);
+              formData.append('action', '<?php echo $existing_review ? 'update' : 'create'; ?>');
+
+              fetch('submit_review.php', {
+                method: 'POST',
+                body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                if(data.success) {
+                  alert('Review ' + '<?php echo $existing_review ? 'updated' : 'submitted'; ?>' + ' successfully!');
+                  location.reload();
+                } else {
+                  alert('Error: ' + data.message);
+                }
+              });
+            };
+            </script>
+
+            <style>
+            .rating {
+              display: flex;
+              flex-direction: row-reverse;
+              justify-content: flex-end;
+            }
+            .rating input {
+              display: none;
+            }
+            .rating label {
+              font-size: 24px;
+              color: #ddd;
+              cursor: pointer;
+            }
+            .rating input:checked ~ label,
+            .rating label:hover,
+            .rating label:hover ~ label {
+              color: #1AD8FC;
+            }
+            </style>
+          <?php  } else { echo "<p>You can only leave a review when you have completed this course</p>"; }?>
+          </div>
+
+</div>
 </div>
 <!-- end course details -->
 

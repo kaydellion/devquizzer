@@ -2,13 +2,14 @@
 
 <?php
 // Get analytics for all users
-$query = "SELECT u.name, COUNT(s.s) as total_submissions,
+$query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
           AVG(s.score) as avg_score, MAX(s.score) as highest_score,
           COUNT(DISTINCT s.quiz_id) as unique_quizzes
           FROM {$siteprefix}users u 
           LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
+          LEFT JOIN {$siteprefix}quiz q ON q.s = s.quiz_id
           WHERE u.type = 'user'
-          GROUP BY u.s
+          GROUP BY q.s
           ORDER BY total_submissions DESC";
 $result = $con->query($query);
 ?>
@@ -24,6 +25,7 @@ $result = $con->query($query);
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Quiz Title</th>
                 <th>Total Submissions</th>
                 <th>Average Score</th>
                 <th>Highest Score</th>
@@ -34,8 +36,9 @@ $result = $con->query($query);
             <?php while($row = $result->fetch_assoc()): ?>
             <tr>
                 <td><?php echo htmlspecialchars($row['name']); ?></td>
+                <td><?php echo $row['quiz_title']; ?></td>
                 <td><?php echo $row['total_submissions']; ?></td>
-                <td><?php echo number_format($row['avg_score'], 2); ?>%</td>
+                <td><?php echo is_null($row['avg_score']) ? '0.00' : number_format($row['avg_score'], 2); ?>%</td>
                 <td><?php echo $row['highest_score']; ?></td>
                 <td><?php echo $row['unique_quizzes']; ?></td>
             </tr>

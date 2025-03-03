@@ -527,8 +527,8 @@ if (isset($_POST['addquiz'])){
     $points = $_POST['points'];
     $language = getLanguagebyCourse($course);
    
-    $query = "INSERT INTO `dv_quiz` (`s`, `language_id`, `course_id`, `title`, `description`, `timer`, `updated_at`, `points`)
-     VALUES (NULL, '$language', '$course', '$title', '$description', '$timer', NOW(), '$points')";
+    $query = "INSERT INTO `dv_quiz` (`s`, `language_id`, `course_id`, `title`, `description`, `timer`, `updated_at`, `points`, `updated_by`)
+     VALUES (NULL, '$language', '$course', '$title', '$description', '$timer', NOW(), '$points', '$user_id')";
     $submit = mysqli_query($con, $query);
     $s_value = mysqli_insert_id($con);
     if ($submit) { 
