@@ -30,7 +30,7 @@ if(isset($_POST['resetpassword'])){
     showSuccessModal($statusAction,$statusMessage);
     }}
 
-    
+
 //register user
 if(isset($_POST['register'])){
     $fullName = $_POST['fullName'];
@@ -64,7 +64,7 @@ else {
     $password=hashPassword($password);
     
     $submit = mysqli_query($con, " INSERT INTO `".$siteprefix."users` (`google_id`,`name`, `email`, `password`, `type`, `reward_points`, `created_date`, `last_login`, `email_verify`, `status`,`profile_picture`,`preference`)
-    VALUES ('$fullName', '$email', '$password', 'user', 0, '$date', '$date', 1, '$status','','$options')")
+    VALUES ('','$fullName', '$email', '$password', 'user', 0, '$date', '$date', 1, '$status','','$options')")
     or die('Could not connect: ' . mysqli_error($con));
     $user_id = mysqli_insert_id($con);
     
