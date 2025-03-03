@@ -206,7 +206,7 @@ if (isset($_POST['sendmessage'])) {
         } else {
             $statusAction="Failed";
             $message = "Failed to send message to $name ($email)";
-            showErrorModal($statusAction, $message);
+            showErrorModal2($statusAction, $message);
         }
     }
 }
@@ -234,16 +234,16 @@ $checkEmail = mysqli_query($con, "SELECT * FROM ".$siteprefix."users WHERE email
 if(mysqli_num_rows($checkEmail) >= 1 ) {
 $statusAction="Ooops!";
 $statusMessage="This email has already been registered. Please try registering another email.";
-showErrorModal($statusAction, $statusMessage); } 					
+showErrorModal2($statusAction, $statusMessage); } 					
 else if (strlen($password) < 6){
     $statusAction="Try Again";
     $statusMessage="Password must have 8 or more characters";
-    showErrorModal($statusAction, $statusMessage);
+    showErrorModal2($statusAction, $statusMessage);
 }										
 else if ($password !== $retypePassword ){
     $statusAction="Ooops!";
     $statusMessage="Password do not match!";
-    showErrorModal($statusAction, $statusMessage);
+    showErrorModal2($statusAction, $statusMessage);
 }
 else {
     $password=hashPassword($password);
@@ -312,12 +312,12 @@ else {
         if ($submit) {
             $statusAction = "Successful";
             $statusMessage = "Course updated successfully! $error";
-            showSuccessModal($statusAction, $statusMessage);
+            showSuccessModal2($statusAction, $statusMessage);
             header("refresh:1; url=courses.php");
         } else {
             $statusAction = "Oops!";
             $statusMessage = "An error has occurred!";
-            showErrorModal($statusAction, $statusMessage);
+            showErrorModal2($statusAction, $statusMessage);
         }
     }
 
@@ -374,11 +374,11 @@ else {
             $statusAction = "Successful";
             $statusMessage = "Section updated successfully! <br>
             <a href='sections.php?course=$course'>View More Sections</a>";
-            showSuccessModal($statusAction, $statusMessage);
+            showSuccessModal2($statusAction, $statusMessage);
         } else {
             $statusAction = "Oops!";
             $statusMessage = "An error has occurred!";
-            showErrorModal($statusAction, $statusMessage);
+            showErrorModal2($statusAction, $statusMessage);
         }
     }
 
@@ -407,13 +407,13 @@ if (isset($_POST['addcourse'])){
     if ($submit) { 
         $statusAction="Successful";
         $statusMessage="Course created successfully! $error";
-        showSuccessModal($statusAction,$statusMessage);
+        showSuccessModal2($statusAction,$statusMessage);
         header("refresh:1; url=addsection.php?course=$s_value");
     } 
     else { die('Could not connect: ' . mysqli_error($con));
         $statusAction="Oops!";
         $statusMessage="An error has occured!";
-        showErrorModal($statusAction,$statusMessage); }
+        showErrorModal2($statusAction,$statusMessage); }
    
 }
 
@@ -508,12 +508,12 @@ $section = $new_chapter;
     if ($submit) { 
         $statusAction="Successful";
         $statusMessage="Section added successfully! Add more or proceed to manage courses <a href='courses.php'>View courses</a>";
-        showSuccessModal($statusAction,$statusMessage);
+        showSuccessModal2($statusAction,$statusMessage);
     } 
     else { die('Could not connect: ' . mysqli_error($con));
         $statusAction="Oops!";
         $statusMessage="An error has occured!";
-        showErrorModal($statusAction,$statusMessage); }
+        showErrorModal2($statusAction,$statusMessage); }
    
 }
 
@@ -534,13 +534,13 @@ if (isset($_POST['addquiz'])){
     if ($submit) { 
         $statusAction="Successful";
         $statusMessage="Quiz created successfully!";
-        showSuccessModal($statusAction,$statusMessage);
+        showSuccessModal2($statusAction,$statusMessage);
         header("refresh:1; url=addquestions.php?quiz=$s_value");
     } 
     else { die('Could not connect: ' . mysqli_error($con));
         $statusAction="Oops!";
         $statusMessage="An error has occured!";
-        showErrorModal($statusAction,$statusMessage); }
+        showErrorModal2($statusAction,$statusMessage); }
    
 }
 
@@ -598,7 +598,7 @@ if (isset($_POST['addquestions'])){
 
     $statusAction="Successful";
     $statusMessage="Questions added to quiz successfully!";
-    showSuccessModal($statusAction,$statusMessage);
+    showSuccessModal2($statusAction,$statusMessage);
     //header("refresh:1; url=quizzes.php");
 }
 
@@ -650,7 +650,7 @@ if (isset($_POST['addgame'])) {
 
     $statusAction = "Successful";
     $statusMessage = "Game ($title) created successfully!";
-    showSuccessModal($statusAction, $statusMessage);
+    showSuccessModal2($statusAction, $statusMessage);
     header("refresh:2; url=games.php");
 }
 
@@ -680,12 +680,12 @@ if (isset($_POST['updatequiz'])) {
     if ($submit) {
         $statusAction = "Successful";
         $statusMessage = "Quiz updated successfully!";
-        showSuccessModal($statusAction, $statusMessage);
+        showSuccessModal2($statusAction, $statusMessage);
         header("refresh:1; url=quizzes.php");
     } else {
         $statusAction = "Oops!";
         $statusMessage = "An error has occurred!";
-        showErrorModal($statusAction, $statusMessage);
+        showErrorModal2($statusAction, $statusMessage);
     }
 }
 
@@ -736,7 +736,7 @@ $stmt->close();
 
         $statusAction = "Successful";
         $statusMessage = "Game ($title) updated successfully!";
-        showSuccessModal($statusAction, $statusMessage);
+        showSuccessModal2($statusAction, $statusMessage);
         header("refresh:2; url=games.php");
     }
 
@@ -769,12 +769,12 @@ $stmt->close();
         if($update){
          $statusAction = "Successful";
         $statusMessage = "Settings Updated Successfully!";
-        showSuccessModal($statusAction, $statusMessage);
+        showSuccessModal2($statusAction, $statusMessage);
         header("refresh:2; url=settings.php");
         } else {
             $statusAction = "Oops!";
             $statusMessage = "An error has occurred!";
-            showErrorModal($statusAction, $statusMessage);
+            showErrorModal2($statusAction, $statusMessage);
         }
     }
 ?>
