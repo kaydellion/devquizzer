@@ -22,7 +22,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     // User already exists
-    echo json_encode(['status' => 'exists', 'message' => 'Email already registered']);
+    echo json_encode(['status' => 'exists', 'message' => 'Email already registered. Please procced to sign in instead']);
     exit;
 } else {
     // New user - Insert into database

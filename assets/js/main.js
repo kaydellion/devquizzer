@@ -281,6 +281,7 @@ function handleCredentialResponse(response) {
           window.location.href = 'dashboard.php';
       } else if (data.status === 'exists') {
           showToast(data.message);
+          alert(data.message);
       } else {
           alert('Google authentication failed!');
       }
