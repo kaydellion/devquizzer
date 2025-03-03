@@ -320,68 +320,79 @@ $is_favorite = isFavorite($user_id, $course_id, $con, $siteprefix);
 </div><!-- End Section Title -->
 
 <div class="container">
-
   <div class="row justify-content-center">
-
     <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-
       <div class="faq-container">
 
         <div class="faq-item faq-active">
           <h3>What is DevQuizzer?</h3>
           <div class="faq-content">
-            <p>Dev Quizzer is an innovative learning platform where you can master coding and programming skills through theory-based courses and gamified learning experiences. Whether you're a beginner or looking to enhance your skills, we’ve got you covered.</p>
+            <p>DevQuizzer is an innovative learning platform where you can master coding and programming skills through theory-based courses and gamified learning experiences. Whether you're a beginner or looking to enhance your skills, we’ve got you covered.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
         <div class="faq-item">
-          <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
+          <h3>How does DevQuizzer work?</h3>
           <div class="faq-content">
-            <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+            <p>DevQuizzer offers structured courses with interactive lessons, coding challenges, quizzes, and gamified experiences. Users enroll in courses, go through learning materials, complete quizzes, and earn points and certificates.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
         <div class="faq-item">
-          <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
+          <h3>Who can use DevQuizzer?</h3>
           <div class="faq-content">
-            <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+            <p>DevQuizzer is designed for everyone, from absolute beginners to advanced developers. Whether you're starting your coding journey or improving your skills, our platform provides courses tailored to your level.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
         <div class="faq-item">
-          <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
+          <h3>Do I receive a certificate after completing a course?</h3>
           <div class="faq-content">
-            <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+            <p>Yes! After successfully completing a course and passing the final quiz, you will receive a certificate of completion, which you can download and share.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
         <div class="faq-item">
-          <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
+          <h3>What is the Tetris Game Course, and how does it work?</h3>
           <div class="faq-content">
-            <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
+            <p>The Tetris Game Course is a unique challenge where users can learn about game development by implementing the classic Tetris game. Upon successful completion, users receive a special certificate recognizing their achievement.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
         <div class="faq-item">
-          <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
+          <h3>Can I track my progress and see my ranking?</h3>
           <div class="faq-content">
-            <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
+            <p>Yes! DevQuizzer features a leaderboard where users can track their progress, compare their rankings with others, and earn rewards based on quiz performance and course completion.</p>
+          </div>
+          <i class="faq-toggle bi bi-chevron-right"></i>
+        </div><!-- End Faq item-->
+
+        <div class="faq-item">
+          <h3>How do rewards and points work?</h3>
+          <div class="faq-content">
+            <p>As you complete quizzes and courses, you earn points that contribute to your overall score. Points help you climb the leaderboard and unlock rewards, including certificates and special achievements.</p>
+          </div>
+          <i class="faq-toggle bi bi-chevron-right"></i>
+        </div><!-- End Faq item-->
+
+        <div class="faq-item">
+          <h3>Can I leave a review after completing a course?</h3>
+          <div class="faq-content">
+            <p>Yes! After completing a course, you can leave feedback and rate the course. Your review helps improve course quality and guide future learners.</p>
           </div>
           <i class="faq-toggle bi bi-chevron-right"></i>
         </div><!-- End Faq item-->
 
       </div>
-
     </div><!-- End Faq Column-->
-
   </div>
-
 </div>
+
 </section><!-- /Faq Section -->
 
 

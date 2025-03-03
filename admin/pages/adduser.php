@@ -54,8 +54,8 @@
     </div>
   </div>
   <div class="mb-3">
+  <label for="exampleFormControlSelect1">Select Type</label>
   <select class="form-select" name="type" id="exampleFormControlSelect1" aria-label="Default select example" required>
-                          <option selected>- Select Type -</option>
                           <option value="user">User</option>
                           <option value="instructor">Instructor</option>
                         </select>
