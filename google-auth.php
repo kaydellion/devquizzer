@@ -21,11 +21,11 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     // User exists - log them in
     $row = $result->fetch_assoc();
-    $id = $row["id"];
+    $id = $row["s"];
     
     // Update last login time
     $date = date('Y-m-d H:i:s');
-    $stmt = $con->prepare("UPDATE ".$siteprefix."users SET last_login = ? WHERE id = ?");
+    $stmt = $con->prepare("UPDATE ".$siteprefix."users SET last_login = ? WHERE s = ?");
     $stmt->bind_param("si", $date, $id);
     $stmt->execute();
 
