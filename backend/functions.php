@@ -112,6 +112,9 @@ function isEnrolled($user_id, $course_id, $con, $siteprefix) {
   }
 
 function isFavorite($userid, $course_id, $con, $siteprefix) {
+    if (empty($userid)) {
+        return false;
+    }
     $query = "SELECT * FROM " . $siteprefix . "favorites WHERE user_id = '$userid' AND course_id = '$course_id'";
     $result = mysqli_query($con, $query);
     return mysqli_num_rows($result) > 0;
