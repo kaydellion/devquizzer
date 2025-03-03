@@ -372,6 +372,12 @@ function parseJavaCode(javaCode) {
         javaCode = javaCode.replace(/public\s+void\s+(\w+)\s*\(\)\s*{/, "function $1() {");
         javaCode = javaCode.replace(/public\s+void\s+(\w+)\s*\(([^)]*)\)\s*{/, "function $1($2) {");
         
+        // Handle class definitions by extracting the methods
+        javaCode = javaCode.replace(/class\s+(\w+)\s*{([\s\S]*)}/, function(match, className, classContent) {
+            // Extract methods from class content and return just the methods
+            return classContent.trim();
+        });
+        
         //console.log("After method conversion:", javaCode);
 
         // Convert Java print statements to JavaScript console logs
