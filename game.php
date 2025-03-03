@@ -478,7 +478,7 @@ function executeJavaCode() {
     } else {
       runButton.disabled = false;
       runButton.textContent = 'Run Code';
-      displayModal("Incorrect solution. Try again!", "OK", null);
+      displayModal("Code compiled successfully. keep goin to solve this level!", "OK", null);
     }
   } else {
     runButton.disabled = false;
