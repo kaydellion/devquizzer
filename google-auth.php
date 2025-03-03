@@ -50,8 +50,6 @@ if ($result->num_rows > 0) {
     $id = $con->insert_id;
     
     // Start session and set cookie
-    session_start();
-    $_SESSION['id'] = $id;
     setcookie("userID", $id, time() + (10 * 365 * 24 * 60 * 60));
 }
 
