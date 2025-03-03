@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Add text to the image
     imagettftext($image, 70, 0, 760, 680, $textColor, $font2Path, $name);
-    imagettftext($image, 40, 0, 780, 800, $textColor, $fontPath, $course);
     
     // Word wrap content
     $maxWidth = 1000;
