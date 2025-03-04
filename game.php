@@ -61,8 +61,8 @@
     }
     ?>
 
+<div class="container">
     <div class="row bg-dark justify-content-center">
-
     <div class="col-md-6 p-5 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
         <p id="levelDescription"><?php echo $description; ?><br>
@@ -77,6 +77,7 @@
 </div>
 <div class="col-md-6 p-1">
 <canvas id="tetrisCanvas" width="300" height="650"></canvas>
+</div>
 </div>
 </div>
 
@@ -212,7 +213,7 @@ function draw() {
 /** Prevent scrolling and white space */
 function preventScrollAndWhitespace() {
   // Prevent scrolling on body
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflowY = 'hidden'; // Only prevent vertical scrolling
   document.body.style.margin = '0';
   document.body.style.padding = '0';
   
@@ -230,7 +231,7 @@ function preventScrollAndWhitespace() {
 }
 
 // Call the function immediately
-preventScrollAndWhitespace();
+//preventScrollAndWhitespace();
 
 /** Move the piece down */
 function moveDown() {
