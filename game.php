@@ -209,6 +209,29 @@ function draw() {
   }
 }
 
+/** Prevent scrolling and white space */
+function preventScrollAndWhitespace() {
+  // Prevent scrolling on body
+  document.body.style.overflow = 'hidden';
+  document.body.style.margin = '0';
+  document.body.style.padding = '0';
+  
+  // Prevent scrolling on mobile devices
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+  
+  // Prevent arrow key scrolling
+  window.addEventListener('keydown', function(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+    }
+  }, false);
+}
+
+// Call the function immediately
+preventScrollAndWhitespace();
+
 /** Move the piece down */
 function moveDown() {
   if (!gameRunning || !gameOn) return;
