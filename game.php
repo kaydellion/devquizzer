@@ -61,7 +61,7 @@
     }
     ?>
 
-   <div class="container bg-dark" style="height: 100vh;">
+   <div class="container bg-dark" style="width:100%;">
    <div class="row justify-content-center">
   <div class="col-md-6 p-5 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
@@ -71,7 +71,7 @@
 
 
 <div id="editorContainer" class="mt-4">
-<textarea id="javaEditor" rows="10" cols="40"></textarea><br>
+<textarea id="javaEditor" rows="7" cols="40"></textarea><br>
 <button class="btn btn-primary w-100" id="RunButton" onclick="executeJavaCode()">Run Code</button>
 </div>
 </div>
