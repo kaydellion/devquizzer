@@ -545,7 +545,7 @@ function sendGameResult(status) {
     xhr.send(params);
 }
 
-/** Keyboard controls */
+/** Keyboard and mouse controls */
 document.addEventListener("keydown", (event) => {
   if (!gameRunning) return;
   switch (event.key) {
@@ -562,6 +562,37 @@ document.addEventListener("keydown", (event) => {
       rotate();
       break;
   }
+});
+
+/**on page load */
+document.addEventListener('DOMContentLoaded', function() {
+  // Hide footer
+  const footer = document.getElementById('footer');
+  if (footer) {
+    footer.style.display = 'none';
+  }
+});
+// Mouse controls
+canvas.addEventListener("click", (event) => {
+  if (!gameRunning) return;
+  
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const canvasWidth = rect.width;
+  
+  if (x < canvasWidth / 3) {
+    moveLeft();
+  } else if (x > (canvasWidth * 2) / 3) {
+    moveRight();
+  } else {
+    rotate();
+  }
+});
+
+canvas.addEventListener("contextmenu", (event) => {
+  if (!gameRunning) return;
+  event.preventDefault();
+  moveDown();
 });
 
 /** Start the game */
