@@ -75,13 +75,18 @@
 <button class="btn btn-primary w-100" id="RunButton" onclick="executeJavaCode()">Run Code</button>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-6 p-1">
 <canvas id="tetrisCanvas" width="300" height="650"></canvas>
 </div>
 </div>
 
 
 <script>
+// Set canvas width to at least 500px
+const canvasWidth = Math.max(500, window.innerWidth * 0.4); // 40% of window width or minimum 500px
+document.getElementById("tetrisCanvas").width = canvasWidth;
+document.getElementById("tetrisCanvas").style.width = canvasWidth + 'px';
+
 // Initialize CodeMirror for Incomplete Code
 const incompleteCodeEditor = CodeMirror.fromTextArea(document.getElementById('javaEditor'), {
     lineNumbers: true,
