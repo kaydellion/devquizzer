@@ -230,7 +230,7 @@ function preventScrollAndWhitespace() {
 }
 
 // Call the function immediately
-preventScrollAndWhitespace();
+//preventScrollAndWhitespace();
 
 /** Move the piece down */
 function moveDown() {
