@@ -61,25 +61,62 @@
     }
     ?>
 
-<div class="container">
-    <div class="row bg-dark justify-content-center">
-    <div class="col-md-6 p-5 text-light">
-        <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
-        <p id="levelDescription"><?php echo $description; ?><br>
-        <pre class="text-primary"><code>Java Code: <?php echo htmlspecialchars($java_code); ?></code></pre>
-        Hint: <?php echo $hint; ?></p>
+    <div class="row m-0 bg-dark">
+      <div class="col-md-6 p-5 text-light">
+      <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
+      <p id="levelDescription"><?php echo $description; ?><br>
+      <pre class="text-primary"><code>Java Code: <?php echo htmlspecialchars($java_code); ?></code></pre>
+      Hint: <?php echo $hint; ?></p>
 
+      <div id="editorContainer" class="mt-4">
+        <textarea id="javaEditor" rows="10" cols="40"></textarea><br>
+        <button class="btn btn-primary w-100" id="RunButton" onclick="executeJavaCode()">Run Code</button>
+      </div>
+      </div>
+      <div class="col-md-6 justify-content-center align-items-center d-flex">
+      <canvas id="tetrisCanvas" width="300" height="600" style="align-items:center;"></canvas>
+      </div>
+    </div>
 
-<div id="editorContainer" class="mt-4">
-<textarea id="javaEditor" rows="5" cols="40"></textarea><br>
-<button class="btn btn-primary w-100" id="RunButton" onclick="executeJavaCode()">Run Code</button>
-</div>
-</div>
-<div class="col-md-6 p-1">
-<canvas id="tetrisCanvas" width="300" height="650"></canvas>
-</div>
-</div>
-</div>
+    <style>
+    #tetrisCanvas {
+      border: none;
+      background-color: #000000;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    html, body {
+      background-color: #000000;
+    }
+    </style>
+  <script>
+    function adjustForMobile() {
+      if (window.innerWidth < 768) {
+      // Adjust textarea
+      document.getElementById('javaEditor').rows = 5;
+      
+      // Adjust CodeMirror height
+      const cmElement = document.querySelector('.CodeMirror');
+      if (cmElement) {
+        cmElement.style.height = '200px';
+      }
+      
+      // Adjust canvas
+      const canvas = document.getElementById('tetrisCanvas');
+      canvas.height = 300; 
+      BLOCK_SIZE = canvas.height / ROWS;
+      } else {
+      // Reset CodeMirror height for desktop
+      const cmElement = document.querySelector('.CodeMirror');
+      if (cmElement) {
+        cmElement.style.height = '300px';
+      }
+      }
+    }
+    window.addEventListener('resize', adjustForMobile);
+    window.addEventListener('load', adjustForMobile);
+    </script>
 
 
 <script>
@@ -152,20 +189,7 @@ function generatePiece() {
   return piece;
 }
 
-function adjustForMobile() {
-  // Check if device is mobile (screen width less than 768px)
-  if (window.innerWidth < 768) {
-    // Adjust textarea rows
-    document.getElementById('javaEditor').rows = 5;
-    
-    // Adjust canvas height and block size for mobile
-    const canvas = document.getElementById('tetrisCanvas');
-    canvas.height = 400;
-    BLOCK_SIZE = canvas.height / ROWS; // Adjust block size based on new height
-  }
-}
-window.addEventListener('resize', adjustForMobile);
-window.addEventListener('load', adjustForMobile);
+
 
 /** Draw the grid and blocks */
 function draw() {
@@ -174,13 +198,42 @@ function draw() {
   
   // Calculate block size based on canvas dimensions
   const blockSize = canvas.height / ROWS;
+  
+  // Calculate offset to center the grid
+  const offsetX = (canvas.width - (COLUMNS * blockSize)) / 2;
 
-  // Draw the grid
+  // Save the current context state
+  ctx.save();
+  // Translate to center the grid
+  ctx.translate(offsetX, 0);
+
+  // Draw the grid lines first
+  ctx.strokeStyle = "#ddd";
+  ctx.lineWidth = 0.5;
+
+  // Draw vertical grid lines
+  for (let c = 0; c <= COLUMNS; c++) {
+    ctx.beginPath();
+    ctx.moveTo(c * blockSize, 0);
+    ctx.lineTo(c * blockSize, canvas.height);
+    ctx.stroke();
+  }
+
+  // Draw horizontal grid lines
+  for (let r = 0; r <= ROWS; r++) {
+    ctx.beginPath();
+    ctx.moveTo(0, r * blockSize);
+    ctx.lineTo(COLUMNS * blockSize, r * blockSize);
+    ctx.stroke();
+  }
+
+  // Draw the filled blocks
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLUMNS; c++) {
       if (grid[r][c]) {
         ctx.fillStyle = grid[r][c];
         ctx.fillRect(c * blockSize, r * blockSize, blockSize, blockSize);
+        ctx.strokeStyle = "#000";
         ctx.strokeRect(c * blockSize, r * blockSize, blockSize, blockSize);
       }
     }
@@ -189,6 +242,7 @@ function draw() {
   // Draw current piece with adjusted block size
   if (currentPiece) {
     ctx.fillStyle = currentPiece.color;
+    ctx.strokeStyle = "#000";
     currentPiece.shape.forEach((row, r) => {
       row.forEach((cell, c) => {
         if (cell) {
@@ -208,30 +262,10 @@ function draw() {
       });
     });
   }
-}
 
-/** Prevent scrolling and white space */
-function preventScrollAndWhitespace() {
-  // Prevent scrolling on body
-  document.body.style.overflowY = 'hidden'; // Only prevent vertical scrolling
-  document.body.style.margin = '0';
-  document.body.style.padding = '0';
-  
-  // Prevent scrolling on mobile devices
-  document.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-  }, { passive: false });
-  
-  // Prevent arrow key scrolling
-  window.addEventListener('keydown', function(e) {
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-      e.preventDefault();
-    }
-  }, false);
+  // Restore the context state
+  ctx.restore();
 }
-
-// Call the function immediately
-//preventScrollAndWhitespace();
 
 /** Move the piece down */
 function moveDown() {
@@ -596,6 +630,8 @@ document.addEventListener('DOMContentLoaded', function() {
     footer.style.display = 'none';
   }
 });
+
+
 // Mouse controls
 canvas.addEventListener("click", (event) => {
   if (!gameRunning) return;
