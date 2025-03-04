@@ -82,6 +82,12 @@
 
 
 <script>
+  const fabricCanvas = new fabric.Canvas('fabricCanvas', {
+    width: 500,   // Set width
+    height: 500,  // Set height
+});
+
+
 // Set canvas width to at least 500px
 const canvasWidth = Math.max(500, window.innerWidth * 0.4); // 40% of window width or minimum 500px
 document.getElementById("tetrisCanvas").width = canvasWidth;
