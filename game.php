@@ -157,10 +157,12 @@ function adjustForMobile() {
     // Adjust textarea rows
     document.getElementById('javaEditor').rows = 5;
     
-    // Adjust canvas height and block size for mobile
+    // Adjust canvas dimensions and block size for mobile
     const canvas = document.getElementById('tetrisCanvas');
     canvas.height = 400;
-    BLOCK_SIZE = canvas.height / ROWS; // Adjust block size based on new height
+    canvas.width = Math.min(300, window.innerWidth - 20); // Responsive width
+    BLOCK_SIZE = Math.min(canvas.width / COLUMNS, canvas.height / ROWS);
+    draw(); // Redraw canvas with new dimensions
   }
 }
 window.addEventListener('resize', adjustForMobile);
