@@ -71,12 +71,12 @@
 
 
 <div id="editorContainer" class="mt-4">
-<textarea id="javaEditor" rows="10" cols="40"></textarea><br>
+<textarea id="javaEditor" rows="5" cols="40"></textarea><br>
 <button class="btn btn-primary w-100" id="RunButton" onclick="executeJavaCode()">Run Code</button>
 </div>
 </div>
 <div class="col-md-6 p-1">
-<canvas id="tetrisCanvas" width="300" height="650"></canvas>
+<canvas id="tetrisCanvas" width="300" height="600"></canvas>
 </div>
 </div>
 
