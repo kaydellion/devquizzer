@@ -61,8 +61,8 @@
     }
     ?>
 
-   <div class="container">
-   <div class="row bg-dark justify-content-center">
+   <div class="container bg-dark" style="height: 100vh;">
+   <div class="row justify-content-center">
   <div class="col-md-6 p-5 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
         <p id="levelDescription"><?php echo $description; ?><br>
