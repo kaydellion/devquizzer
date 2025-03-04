@@ -63,7 +63,7 @@
 
     <div class="row bg-dark">
 
-    <div class="col-md-6 p-5 text-light">
+    <div class="col-md-6 p-5 mb-0 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
         <p id="levelDescription"><?php echo $description; ?><br>
         <pre class="text-primary"><code>Java Code: <?php echo htmlspecialchars($java_code); ?></code></pre>
@@ -76,7 +76,7 @@
 </div>
 </div>
 <div class="col-md-6">
-<canvas id="tetrisCanvas" width="300" height="600"></canvas>
+<canvas id="tetrisCanvas" width="100%" height="700"></canvas>
 </div>
 </div>
 
