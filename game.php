@@ -76,7 +76,7 @@
 </div>
 </div>
 <div class="col-md-6">
-<canvas id="tetrisCanvas" width="700" height="650"></canvas>
+<canvas id="tetrisCanvas" width="300" height="650"></canvas>
 </div>
 </div>
 
