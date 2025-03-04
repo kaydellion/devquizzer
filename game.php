@@ -61,7 +61,7 @@
     }
     ?>
 
-    <div class="row bg-dark">
+    <div class="row bg-dark justify-content-center">
 
     <div class="col-md-6 p-5 text-light">
         <h5 class="text-primary" id="levelTitle">Level <?php echo $level; ?>: <?php echo $title; ?></h5>
@@ -157,12 +157,10 @@ function adjustForMobile() {
     // Adjust textarea rows
     document.getElementById('javaEditor').rows = 5;
     
-    // Adjust canvas dimensions and block size for mobile
+    // Adjust canvas height and block size for mobile
     const canvas = document.getElementById('tetrisCanvas');
     canvas.height = 400;
-    canvas.width = Math.min(300, window.innerWidth - 20); // Responsive width
-    BLOCK_SIZE = Math.min(canvas.width / COLUMNS, canvas.height / ROWS);
-    draw(); // Redraw canvas with new dimensions
+    BLOCK_SIZE = canvas.height / ROWS; // Adjust block size based on new height
   }
 }
 window.addEventListener('resize', adjustForMobile);
@@ -232,7 +230,7 @@ function preventScrollAndWhitespace() {
 }
 
 // Call the function immediately
-//preventScrollAndWhitespace();
+preventScrollAndWhitespace();
 
 /** Move the piece down */
 function moveDown() {
