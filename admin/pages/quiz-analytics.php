@@ -2,15 +2,31 @@
 
 <?php
 // Get analytics for all users
-$query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
-          AVG(s.score) as avg_score, MAX(s.score) as highest_score,
-          COUNT(DISTINCT s.quiz_id) as unique_quizzes
-          FROM {$siteprefix}users u 
-          LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
-          LEFT JOIN {$siteprefix}quiz q ON q.s = s.quiz_id
-          WHERE u.type = 'user'
-          GROUP BY q.s
-          ORDER BY total_submissions DESC";
+if($type=='admin'){
+    $query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
+              AVG(s.score) as avg_score, MAX(s.score) as highest_score,
+              COUNT(DISTINCT s.quiz_id) as unique_quizzes
+              FROM {$siteprefix}users u 
+              LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
+              LEFT JOIN {$siteprefix}quiz q ON q.s = s.quiz_id
+              WHERE u.type = 'user'
+              GROUP BY q.s
+              ORDER BY total_submissions DESC";
+    $result = $con->query($query);
+}
+// Get analytics for a specific user
+else{
+    $query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
+              AVG(s.score) as avg_score, MAX(s.score) as highest_score,
+              COUNT(DISTINCT s.quiz_id) as unique_quizzes
+              FROM {$siteprefix}users u 
+              LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
+              LEFT JOIN {$siteprefix}quiz q ON q.s = s.quiz_id
+              WHERE u.type = 'user' AND q.updated_by='$user_id'
+              GROUP BY q.s
+              ORDER BY total_submissions DESC";
+    $result = $con->query($query);
+}
 $result = $con->query($query);
 ?>
 
