@@ -304,7 +304,7 @@ else {
             level = '$level',
             featured_image = '$picture', 
             updated_date = NOW(), 
-            updated_by = '$name', 
+            updated_by = '$user_id', 
             status = '$status' 
             WHERE s = '$course_id'";
 
@@ -672,6 +672,7 @@ if (isset($_POST['updatequiz'])) {
               title = '$title',
               description = '$description',
               timer = '$timer',
+              updated_by = '$user_id', 
               points = '$points',
               updated_at = NOW()
               WHERE s = '$quiz_id'";
