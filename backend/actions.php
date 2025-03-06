@@ -206,7 +206,7 @@ if (isset( $_POST['login'])){
     }
      
     
-    else if($verify == "0"){
+    else if($status=="inactive"){
         $statusAction="Ooops!";
         $statusMessage=' Email Address have not been verified. we have sent you a mail which contains verification link. kindly check your email and verify your email address.';
         showErrorModal($statusAction, $statusMessage);  

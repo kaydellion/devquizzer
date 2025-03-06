@@ -60,7 +60,7 @@ $result = $con->query($query);
             </tr>
             <?php endwhile; ?>
         </tbody>
-    </table>
+    </table> 
 </div>
 
 

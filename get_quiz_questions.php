@@ -44,7 +44,7 @@ try {
             $questions[$question_id] = [
                 'id' => $question_id,
                 'question' => $row['question'],
-                'points' => $row['points'],
+                'points' => 1,
                 'options' => []
             ];
         }
