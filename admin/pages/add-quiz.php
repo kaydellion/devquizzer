@@ -38,7 +38,7 @@
                         <input class="form-control" type="number" name="duration" required/>
                        </div>
                        <div class="mb-3">
-                        <label for="formFile" class="form-label">Reward Points Assigned (* note that points are awarded if user passes 80% of the quiz)</label>
+                        <label for="formFile" class="form-label">Reward Points Assigned (* note that points are awarded if user passes 70% of the quiz)</label>
                         <input class="form-control" type="number" name="points" required/>
                        </div>
                         <button type="submit" name="addquiz" value="course" class="btn btn-primary w-100">Create Quiz</button>

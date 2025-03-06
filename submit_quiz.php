@@ -87,7 +87,7 @@ if (!$stmt->execute()) {
 
 
 // If score is 80% or higher
-if ($score_percentage >= 80) {
+if ($score_percentage >= 70) {
     // Get quiz and course information
     $query = "SELECT quiz_id, course_id FROM {$siteprefix}submissions WHERE s = ?";
     $stmt = $con->prepare($query);
@@ -164,7 +164,7 @@ if ($score_percentage >= 80) {
         'success' => true, 
         'score' => $total_score,
         'percentage' => $score_percentage,
-        'message' => 'Score below 80%. No points or certificate awarded.'
+        'message' => 'Score below 70%. No points or certificate awarded.'
     ]); }} catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
