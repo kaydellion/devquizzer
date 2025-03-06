@@ -47,7 +47,7 @@
                         </div>
                         <div class="mb-3">
                         <label for="formFile" class="form-label">Select featured image</label>
-                        <input class="form-control" type="file" name="featured" id="formFile"  required/>
+                        <input class="form-control" type="file" name="featured" id="formFile" accept="image/*" required/>
                       </div>
                       <div class="mb-3">
                         <select class="form-select" name="status" id="exampleFormControlSelect1" aria-label="Default select example" required/>
