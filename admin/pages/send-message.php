@@ -17,7 +17,7 @@
                         </div>
                         <div class="mb-3">
                         <label class="form-label" for="exampleFormControlSelect1">Select Recipient(s)</label>
-                        <select class="form-select select-multiple" name="user" id="exampleFormControlSelect1" aria-label="Default select example" multiple="multiple">
+                        <select class="form-select select-multiple" name="user[]" id="exampleFormControlSelect1" aria-label="Default select example" multiple="multiple">
                           <option value="all">All Users</option>
                           <option value="instructor">All Instructors</option>
                           <option value="user">All Users</option>
