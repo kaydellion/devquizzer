@@ -141,7 +141,7 @@ if (isset($_POST['update-user'])) {
 //send message
 if (isset($_POST['sendmessage'])) {
     $subject = htmlspecialchars(trim($_POST['title']), ENT_QUOTES, 'UTF-8');
-    $content = htmlspecialchars(trim($_POST['content']), ENT_QUOTES, 'UTF-8');
+    $content = trim($_POST['content']);
     $recipientSelection = $_POST['user']; // For arrays, sanitize later
 
     // Initialize recipient list and names
