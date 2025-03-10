@@ -30,7 +30,7 @@
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-message">Message Content</label>
-                          <textarea id="basic-default-message" name="content" class="form-control  editor" placeholder="This course is a course for ..." required/></textarea>
+                          <textarea id="basic-default-message" name="content" class="form-control  editor" placeholder="This course is a course for ..." ></textarea>
                         </div>
                         <button type="submit" name="sendmessage" value="send" class="btn btn-primary w-100">Send Message</button>
                       </form>
