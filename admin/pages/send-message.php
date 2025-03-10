@@ -20,7 +20,7 @@
                         <select class="form-select select-multiple" name="user[]" id="exampleFormControlSelect1" aria-label="Default select example" multiple="multiple">
                           <option value="all">All Users</option>
                           <option value="instructor">All Instructors</option>
-                          <option value="user">All Users</option>
+                          <option value="user">All Students</option>
                           <?php
                      $sql = "SELECT * FROM " . $siteprefix . "users where type !='admin'";
                      $sql2 = mysqli_query($con, $sql);
