@@ -147,6 +147,7 @@ if (isset($_POST['sendmessage'])) {
     // Initialize recipient list and names
     $recipients = [];
     $recipientNames = [];
+    $query = '';    
 
     // Handle recipient selection
     if (in_array('all', $recipientSelection)) {
