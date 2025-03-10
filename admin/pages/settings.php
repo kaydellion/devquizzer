@@ -29,7 +29,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Site Logo</label>
-                        <img src="../../assets/img/<?php echo $siteimg; ?>" style="width: 20%; height: auto;" class="mb-2">
+                        <img src="<?php echo $siteurl;?>assets/img/<?php echo $siteimg; ?>" style="width: 20%; height: auto;" class="mb-2">
                         <input type="file" name="site_logo" class="form-control">
                     </div>
                     <div class="mb-3">

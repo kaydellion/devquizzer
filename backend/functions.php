@@ -163,7 +163,7 @@ function sendEmail($vendorEmail, $vendorName, $siteName, $siteMail, $emailMessag
     $email_to = $vendorEmail;
     $email_subject = "$emailSubject - $siteName";
     $email_message = "<div style='width:600px; padding:100px 60px; background-color:#000; color:#fff;'>
-    <p><img src='https://$siteurl/assets/img/$siteimg' style='width:10%; height:auto;' /></p>
+    <p><img src='$siteurl/assets/img/$siteimg' style='width:10%; height:auto;' /></p>
     <p style='font-size:14px; color:#fff;'> <span style='font-size:14px; color:#1AD8FC;'>Hello there, $vendorName,</span>
     $emailMessage</p>
     <p><a href='$siteurl' style='font-size:14px; padding-top:20px;  font-weight:600; color:#1AD8FC;'>VISIT THE WEBSITE</a></p>
