@@ -115,16 +115,11 @@ include "actions.php"; ?>
 <script src="../assets/vendor/js/helpers.js"></script>
 <script src="../assets/js/config.js"></script>
 <!-- Place the first <script> tag in your HTML's <head> -->
-<script src="https://cdn.tiny.cloud/1/lxphyils3mh06lqfkntl7w5kgljaoegwzfnylpr6m9g3ids6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-
+<script src="https://cdn.tiny.cloud/1/7ydntvbtytnz9gygewvcu0ten8crdhlrtfl7n54c3fejd273/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
 <script>
   tinymce.init({
     selector: '.editor',
-    plugins: [
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-    ],
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
     tinycomments_mode: 'embedded',
     tinycomments_author: 'Author name',
