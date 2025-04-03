@@ -169,7 +169,7 @@ include "backend/actions.php"; ?>
           <li><a href="index.php" class="active">Home<br></a></li>
           <li><a href="courses.php">All Courses</a></li>
           <li><a href="game.php">Learn With Game</a></li>
-          <li><a href="index.php#faq">About Us</a></li>
+          <li><a href="about-us.php">About Us</a></li>
           <li><a href="contact.php">Contact</a></li>
           <li><a href="leaderboard.php">Leaderboard</a></li>
           <?php if($active_log==1){ ?>
