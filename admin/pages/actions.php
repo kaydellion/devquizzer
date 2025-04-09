@@ -751,6 +751,7 @@ $stmt->close();
         $description = $_POST['site_description'];
         $email = $_POST['site_mail'];
         $number = $_POST['site_number'];
+        $profilePicture = $_FILES['site_logo'];
 
 
         $uploadDir = '../../assets/img/';
