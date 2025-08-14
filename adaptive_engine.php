@@ -168,7 +168,7 @@ function q_update($con, $state_hash, $action_id, $reward, $next_state_hash, $can
 
     // log transition
     $stmt = $con->prepare("INSERT INTO rl_log (user_id, state_hash, action_id, reward, next_state_hash) VALUES (?, ?, ?, ?, ?)");
-    $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
+    $user_id = isset($user_id) ? intval($user_id) : 0;
     $stmt->bind_param("isids", $user_id, $state_hash, $action_id, $reward, $next_state_hash);
     $stmt->execute();
     $stmt->close();
