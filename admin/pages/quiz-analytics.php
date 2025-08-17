@@ -45,6 +45,7 @@ else{
                 <th>Average Score</th>
                 <th>Highest Score</th>
                 <th>Unique Quizzes</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
