@@ -217,6 +217,11 @@ include "actions.php"; ?>
                     <div data-i18n="Container">Analytics & Submissions</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a href="analytics.php" class="menu-link">
+                    <div data-i18n="Container">AI Stats</div>
+                  </a>
+                </li>
               </ul>
             </li>
 

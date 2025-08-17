@@ -17,7 +17,7 @@ if ($user_role !== 'admin' && $user_role !== 'instructor') {
 }
 
 // Get filter parameters
-$selected_course = $_GET['course_id'] ?? '';
+$selected_course = $_GET['course_id'] ?? 9 ;
 $selected_user = $_GET['user_id'] ?? '';
 $date_from = $_GET['date_from'] ?? date('Y-m-d', strtotime('-30 days'));
 $date_to = $_GET['date_to'] ?? date('Y-m-d');
@@ -346,12 +346,12 @@ $course_performance = get_course_performance($con, $siteprefix);
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="mb-2"><i class="fas fa-chart-bar me-2"></i>Admin Analytics Dashboard</h1>
+                    <h1 class="mb-2 text-white"><i class="fas fa-chart-bar me-2"></i>Admin Analytics Dashboard</h1>
                     <p class="mb-0 opacity-75">Comprehensive overview of learning analytics and system performance</p>
                 </div>
                 <div class="col-md-4 text-md-end">
                     <div class="btn-group">
-                        <a href="admin_dashboard.php" class="btn btn-outline-light">
+                        <a href="index.php" class="btn btn-outline-light">
                             <i class="fas fa-arrow-left me-1"></i>Back to Admin
                         </a>
                         <button class="btn btn-outline-light" onclick="exportData()">
@@ -374,7 +374,7 @@ $course_performance = get_course_performance($con, $siteprefix);
                             <option value="">All Courses</option>
                             <?php foreach ($courses as $course): ?>
                             <option value="<?= $course['s'] ?>" <?= $selected_course == $course['s'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($course['course_name']) ?>
+                                <?= htmlspecialchars($course['title']) ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
