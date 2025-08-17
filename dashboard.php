@@ -36,7 +36,8 @@
 <h3 class="text-bold">My Courses</h3>
 <?php 
 
-$query = "SELECT c.*, l.title AS category FROM ".$siteprefix."enrolled_courses e LEFT JOIN ".$siteprefix."courses c ON e.course_id=c.s LEFT JOIN ".$siteprefix."languages l ON c.language=l.s WHERE e.user_id='$user_id' AND c.status='publish'";
+$query = "SELECT c.*, l.title AS category FROM ".$siteprefix."enrolled_courses e LEFT JOIN ".$siteprefix."courses c ON e.course_id=c.s LEFT JOIN ".$siteprefix."languages l ON c.language=l.s WHERE e.user_id='$user_id' AND c.status='publish' 
+GROUP BY c.s ORDER BY c.updated_date DESC";
 $result = mysqli_query($con, $query);
 if(mysqli_num_rows($result) > 0 ) { 
 while ($row = mysqli_fetch_assoc($result)) {
