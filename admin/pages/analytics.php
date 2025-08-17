@@ -24,7 +24,7 @@ $date_to = $_GET['date_to'] ?? date('Y-m-d');
 
 // Get all courses for filter
 function get_all_courses($con, $siteprefix) {
-    $query = "SELECT s, course_name FROM {$siteprefix}courses ORDER BY course_name";
+    $query = "SELECT s,title FROM {$siteprefix}courses ORDER BY title";
     $result = $con->query($query);
     $courses = [];
     while ($row = $result->fetch_assoc()) {
@@ -266,7 +266,7 @@ function get_ql_insights($con) {
 function get_course_performance($con, $siteprefix) {
     $query = "SELECT 
                 c.s as course_id,
-                c.course_name,
+                c.title,
                 COUNT(DISTINCT s.user_id) as enrolled_users,
                 COUNT(s.s) as total_submissions,
                 AVG(s.percentage) as avg_score,
@@ -275,7 +275,7 @@ function get_course_performance($con, $siteprefix) {
               FROM {$siteprefix}courses c
               LEFT JOIN {$siteprefix}submissions s ON c.s = s.course_id
               LEFT JOIN {$siteprefix}enrolled_courses ec ON c.s = ec.course_id AND ec.certificate = 1
-              GROUP BY c.s, c.course_name
+              GROUP BY c.s, c.title
               HAVING total_submissions > 0
               ORDER BY avg_score DESC";
     
@@ -285,7 +285,7 @@ function get_course_performance($con, $siteprefix) {
         $pass_rate = $row['total_submissions'] > 0 ? round(($row['passing_submissions'] / $row['total_submissions']) * 100, 1) : 0;
         $courses[] = [
             'course_id' => $row['course_id'],
-            'course_name' => $row['course_name'],
+            'course_name' => $row['title'],
             'enrolled_users' => $row['enrolled_users'],
             'total_submissions' => $row['total_submissions'],
             'avg_score' => round($row['avg_score'], 1),
