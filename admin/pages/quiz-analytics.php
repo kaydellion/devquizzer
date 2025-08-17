@@ -57,7 +57,7 @@ else{
                 <td><?php echo is_null($row['avg_score']) ? '0.00' : number_format($row['avg_score'], 2); ?>%</td>
                 <td><?php echo $row['highest_score']; ?></td>
                 <td><?php echo $row['unique_quizzes']; ?></td>
-                <td class="text-end"></td>
+                <td class="text-end">
                     <a href="analytics.php?course_id=<?php echo $row['course_id']; ?>&user_id=<?php echo $row['user_id']; ?>" class="btn btn-primary">View Details</a>
                 </td>
             </tr>

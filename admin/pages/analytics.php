@@ -5,10 +5,10 @@ require_once '../../adaptive_engine.php';
 
 
 // Check admin privileges (modify based on your system)
-$stmt = $con->prepare("SELECT role FROM {$siteprefix}users WHERE s = ?");
+$stmt = $con->prepare("SELECT type FROM {$siteprefix}users WHERE s = ?");
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
-$user_role = $stmt->get_result()->fetch_assoc()['role'] ?? '';
+$user_role = $stmt->get_result()->fetch_assoc()['type'] ?? '';
 $stmt->close();
 
 if ($user_role !== 'admin' && $user_role !== 'instructor') {
@@ -35,7 +35,7 @@ function get_all_courses($con, $siteprefix) {
 
 // Get all users for filter
 function get_all_users($con, $siteprefix) {
-    $query = "SELECT s, name, email FROM {$siteprefix}users WHERE role != 'admin' ORDER BY name LIMIT 100";
+    $query = "SELECT s, name, email FROM {$siteprefix}users WHERE type != 'admin' ORDER BY name LIMIT 100";
     $result = $con->query($query);
     $users = [];
     while ($row = $result->fetch_assoc()) {
