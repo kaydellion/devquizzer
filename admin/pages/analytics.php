@@ -17,7 +17,7 @@ if ($user_role !== 'admin' && $user_role !== 'instructor') {
 }
 
 // Get filter parameters
-$selected_course = $_GET['course_id'] ?? 9 ;
+$selected_course = $_GET['course_id'] ?? '' ;
 $selected_user = $_GET['user_id'] ?? '';
 $date_from = $_GET['date_from'] ?? date('Y-m-d', strtotime('-30 days'));
 $date_to = $_GET['date_to'] ?? date('Y-m-d');
@@ -96,8 +96,12 @@ function get_system_stats($con, $siteprefix, $course_filter = '', $date_from = '
     $stmt->close();
     
     // Certificates issued
-    $cert_where = $course_filter ? "WHERE course_id = $course_filter" : '';
-    $certificates = $con->query("SELECT COUNT(*) as certificates FROM {$siteprefix}enrolled_courses $cert_where AND certificate = 1")->fetch_assoc()['certificates'];
+    if ($course_filter) {
+        $cert_where = "WHERE course_id = $course_filter AND certificate = 1";
+    } else {
+        $cert_where = "WHERE certificate = 1";
+    }
+    $certificates = $con->query("SELECT COUNT(*) as certificates FROM {$siteprefix}enrolled_courses $cert_where")->fetch_assoc()['certificates'];
     
     // Average skill mastery across all users
     $avg_mastery = $con->query("SELECT AVG(p_learned) as avg_mastery FROM user_skills")->fetch_assoc()['avg_mastery'] ?? 0;
