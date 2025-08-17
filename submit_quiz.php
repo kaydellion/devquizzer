@@ -193,7 +193,7 @@ if ($score_percentage >= 70) {
     $next_state_hash = build_state_hash($con, $user_id, $skill_list);
     
     // 6) Get previous state and action from session/database
-    session_start();
+
     $prev_state = isset($_SESSION['prev_state']) ? $_SESSION['prev_state'] : $state_hash;
     $prev_action = isset($_SESSION['prev_action']) ? intval($_SESSION['prev_action']) : $submission_id;
     
@@ -248,7 +248,7 @@ if ($score_percentage >= 70) {
     
     $next_state_hash = build_state_hash($con, $user_id, $skill_list);
     
-    session_start();
+ 
     $prev_state = isset($_SESSION['prev_state']) ? $_SESSION['prev_state'] : $state_hash;
     $prev_action = isset($_SESSION['prev_action']) ? intval($_SESSION['prev_action']) : $submission_id;
     

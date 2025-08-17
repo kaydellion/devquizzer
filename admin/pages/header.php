@@ -26,6 +26,7 @@ if (mysqli_affected_rows($con) == 0) {
         $email_verify = $row['email_verify'];
         $status = $row['status'];
         $profile_picture = !empty($row['profile_picture']) ? $row['profile_picture'] : 'user.png';
+        $user_role = $type;
         
 
         
@@ -99,6 +100,7 @@ include "actions.php"; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/r/r.min.js"></script> <!-- For R -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/swift/swift.min.js"></script> <!-- For Swift -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/kotlin/kotlin.min.js"></script> <!-- For Kotlin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -111,6 +113,9 @@ include "actions.php"; ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.min.css">
 <script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 <script src="../assets/vendor/js/helpers.js"></script>
 <script src="../assets/js/config.js"></script>

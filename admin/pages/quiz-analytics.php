@@ -3,8 +3,8 @@
 <?php
 // Get analytics for all users
 if($type=='admin'){
-    $query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
-              AVG(s.score) as avg_score, MAX(s.score) as highest_score,
+    $query = "SELECT u.name, q.course_id,  q.title as quiz_title, COUNT(s.s) as total_submissions,
+              AVG(s.score) as avg_score, MAX(s.score) as highest_score,u.s as current_user,
               COUNT(DISTINCT s.quiz_id) as unique_quizzes
               FROM {$siteprefix}users u 
               LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
@@ -16,8 +16,8 @@ if($type=='admin'){
 }
 // Get analytics for a specific user
 else{
-    $query = "SELECT u.name,  q.title as quiz_title, COUNT(s.s) as total_submissions,
-              AVG(s.score) as avg_score, MAX(s.score) as highest_score,
+    $query = "SELECT u.name, q.course_id,  q.title as quiz_title, COUNT(s.s) as total_submissions,
+              AVG(s.score) as avg_score, MAX(s.score) as highest_score, u.s as current_user,
               COUNT(DISTINCT s.quiz_id) as unique_quizzes
               FROM {$siteprefix}users u 
               LEFT JOIN {$siteprefix}submissions s ON u.s = s.user_id
@@ -57,6 +57,9 @@ $result = $con->query($query);
                 <td><?php echo is_null($row['avg_score']) ? '0.00' : number_format($row['avg_score'], 2); ?>%</td>
                 <td><?php echo $row['highest_score']; ?></td>
                 <td><?php echo $row['unique_quizzes']; ?></td>
+                <td class="text-end"></td>
+                    <a href="analytics.php?course_id=<?php echo $row['course_id']; ?>&user_id=<?php echo $row['current_user']; ?>" class="btn btn-primary">View Details</a>
+                </td>
             </tr>
             <?php endwhile; ?>
         </tbody>
