@@ -80,7 +80,16 @@ function update_user_skill_bkt($con, $user_id, $skill_id, $observed_correct) {
 function build_state_hash($con, $user_id, $skill_list = [], $buckets = 5) {
     // skill_list is an array of skill_ids we care about (all skills in the course/section)
     if (empty($skill_list)) {
-        return 'global'; // fallback state
+        // Fetch all skill_ids from dv_skills
+        $skill_list = [];
+        $res = $con->query("SELECT s FROM dv_skills");
+        while ($row = $res->fetch_assoc()) {
+            $skill_list[] = (int)$row['s'];
+        }
+        $res->close();
+        if (empty($skill_list)) {
+            return 'global'; // fallback state if still empty
+        }
     }
     $parts = [];
     foreach ($skill_list as $skill_id) {
