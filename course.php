@@ -344,7 +344,7 @@ $is_favorite = isFavorite($user_id, $course_id, $con, $siteprefix);
               </div>
               <a href="course.php?course=<?php echo $course_id; ?>" class="btn-get-started"><i class="bi bi-search"></i> Start Now</a></div>
               <!-- Description -->
-              <p class="course-description"><?php echo $limitedDescription; ?></p>
+              <p class="course-description"><?php echo $description; ?></p>
               <hr class="separator">
               <div class="course-info d-flex justify-content-between">
               <span class="info-text"><?php echo $lesson_count; ?> Lessons</span>
